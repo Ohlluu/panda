@@ -7,9 +7,11 @@
     "dev": "node server.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test tests/scheduling.test.mjs",
-    "test:browser": "node scripts/review.mjs"
+    "test:browser": "node scripts/review.mjs",
+    "format": "prettier --write ."
   },
   "devDependencies": {
-    "playwright": "^1.63.0"
+    "playwright": "^1.63.0",
+    "prettier": "^3.10.1"
   }
 }
