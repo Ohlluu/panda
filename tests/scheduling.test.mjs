@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {slotsFor,initialState,addDays,todayKey,parseDate} from '../scheduling.js';
+const now=new Date('2026-11-16T14:00:00Z');
+const settings=initialState().settings;
+test('weekly schedule produces duration and buffer spaced slots',()=>{const slots=slotsFor('2026-11-17',settings,[],null,now);assert.equal(slots[0],'09:00');assert.equal(slots[1],'09:45');assert.equal(slots.at(-1),'15:00');});
+test('blocks dates, disabled weekdays, past dates and the booking horizon',()=>{assert.deepEqual(slotsFor('2026-11-17',{...settings,blocked:['2026-11-17']},[],null,now),[]);for(const d of ['2026-11-15','2026-11-21','2027-05-01'])assert.deepEqual(slotsFor(d,settings,[],null,now),[]);});
+test('overlapping bookings and buffers are excluded, cancellations release time',()=>{const booking={id:'one',date:'2026-11-17',time:'09:00',duration:60,status:'confirmed'};let slots=slotsFor(booking.date,settings,[booking],null,now);assert(!slots.includes('09:00'));assert(!slots.includes('09:45'));assert(slots.includes('10:30'));assert(slotsFor(booking.date,settings,[{...booking,status:'cancelled'}],null,now).includes('09:00'));assert(slotsFor(booking.date,settings,[booking],'one',now).includes('09:00'));});
+test('today excludes times that have already passed in Chicago',()=>{const slots=slotsFor('2026-11-16',settings,[],null,new Date('2026-11-16T16:00:00Z'));assert(!slots.includes('09:00'));assert(!slots.includes('09:45'));assert(slots.includes('10:30'));});
+test('existing bookings still block time after duration changes',()=>{const b={date:'2026-11-17',time:'09:00',duration:60,status:'confirmed'};assert(!slotsFor(b.date,{...settings,duration:15,buffer:0},[b],null,now).includes('09:45'));});
