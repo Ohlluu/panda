@@ -1,6 +1,6 @@
 # Little Panda Daycare
 
-A polished bilingual English/Spanish daycare website, family-tour booking flow, and staff dashboard. Built with semantic HTML, CSS, and native JavaScript modules. No application framework, runtime dependencies, database, or account setup required.
+A sunny, colorful bilingual English/Spanish daycare website, family-tour booking flow, and staff dashboard. The public design uses a yellow playground palette, snapshot-style photographs, original toy illustrations, handwritten notes, and scalloped section edges. Built with semantic HTML, CSS, and native JavaScript modules. No application framework, runtime dependencies, database, or account setup required.
 
 ## Run locally
 
@@ -60,8 +60,8 @@ The browser checks cover EN/ES switching, form submission, persistence, calendar
 - `assets/learning.jpg`: [Pexels photo 3662667](https://www.pexels.com/photo/3662667/) — children playing with wooden blocks.
 - `assets/child.jpg`: [Unsplash source](https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9) — child enjoying art.
 - `assets/logo.png`: original AI-generated Little Panda Daycare logo concept.
-- `assets/favicon.svg`: original simple panda mark used in the compact website wordmark.
-- Fonts: Fredoka and DM Sans, served by Google Fonts with local system fallbacks.
+- `assets/favicon.svg`: original simple panda mark used as the favicon and small dashboard illustration.
+- Fonts: Fredoka, Patrick Hand, and DM Sans, served by Google Fonts with local system fallbacks.
 
 ## Before production
 

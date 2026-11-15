@@ -1,0 +1,1973 @@
+/* Little Panda: a sunny, colorful playground. Shared functional layouts live in styles.css. */
+:root {
+  --cream: #fffdf5;
+  --paper: #fffefa;
+  --green: #284985;
+  --ink: #293c65;
+  --muted: #64718c;
+  --line: #dce4f1;
+  --sage: #e3f3dc;
+  --coral: #ec7666;
+  --butter: #ffda60;
+  --sunshine: #ffda60;
+  --sky: #e5f5fc;
+  --lilac: #a58acb;
+  --hand: 'Patrick Hand', cursive;
+}
+body {
+  color: var(--ink);
+  background: var(--cream);
+}
+p {
+  color: #5d6980;
+}
+h1,
+h2,
+h3 {
+  font-weight: 550;
+  letter-spacing: -0.02em;
+}
+em {
+  color: #d96956;
+}
+.button {
+  border-radius: 30px;
+  padding: 15px 25px;
+  font-size: 14px;
+  min-height: 52px;
+  gap: 18px;
+  box-shadow: 0 4px 0 #163560;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.button:hover:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #163560;
+}
+.primary {
+  background: #345daf;
+  color: white;
+}
+.primary:hover:not(:disabled) {
+  background: #294e9d;
+}
+.outline {
+  background: white;
+  border: 2px solid #cbdaf0;
+  box-shadow: none;
+  color: #31528d;
+}
+.outline:hover {
+  background: #e9f4ff;
+  box-shadow: none;
+}
+.button:disabled {
+  box-shadow: none;
+}
+.text-link,
+.back-link {
+  color: #3d65a0;
+}
+.announcement {
+  background: #dff2fa;
+  color: #365d85;
+  min-height: 35px;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.announcement > span {
+  color: #365d85;
+  border-color: #aacddd;
+}
+.site-header {
+  background: #fffdf7f5;
+  border-bottom: 0;
+}
+.header-inner {
+  height: 105px;
+}
+.brand .brand-logo {
+  width: 190px;
+  height: 72px;
+  object-fit: contain;
+}
+.header-inner nav {
+  font-size: 14px;
+  font-weight: 600;
+  gap: 27px;
+}
+.header-inner nav a:hover {
+  color: #d75e56;
+}
+.header-actions .button {
+  border-radius: 25px;
+  font-size: 13px;
+  padding: 12px 22px;
+  min-height: 44px;
+}
+.language {
+  background: #eef5fc;
+  border-radius: 24px;
+  padding: 3px 9px;
+}
+.language button {
+  font-size: 12px;
+  color: #73849a;
+}
+.language button[aria-pressed='true'] {
+  color: #264a8b;
+}
+.menu-toggle {
+  background: transparent;
+}
+.footer-grid .brand .brand-logo {
+  width: 180px;
+  height: 65px;
+}
+footer {
+  background: #e4f3fa;
+  border-top: 0;
+}
+.footer-grid p,
+.footer-grid a:not(.brand) {
+  color: #526b8c;
+  font-size: 12px;
+}
+.footer-grid strong {
+  font-size: 13px;
+}
+.footer-grid small {
+  color: #6e82a0;
+  font-size: 10px;
+}
+.footer-note {
+  background: #fff3bd;
+  border-radius: 23px;
+}
+.footer-note > .icon {
+  color: #df9042;
+}
+.footer-bottom {
+  border-top: 1px dashed #a9c9dd;
+  font-size: 10px;
+  color: #667f9e;
+}
+.footer-bottom a {
+  color: #2b5799;
+}
+/* The public homepage has its own composition, with room for photos and hand-drawn details. */
+#sunny-home {
+  overflow: clip;
+}
+.hand-note {
+  font-family: var(--hand);
+  font-size: 26px;
+  font-weight: 400;
+  color: #ac584a;
+  line-height: 1.2;
+  display: block;
+}
+.sunny-hero {
+  background: #ffdf6b;
+  position: relative;
+  padding: 55px 0 75px;
+  isolation: isolate;
+}
+.sunny-hero:after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 26px;
+  background: radial-gradient(circle at 24px -3px, transparent 27px, var(--cream) 28px) 0 0/48px
+    30px repeat-x;
+  z-index: 3;
+}
+.sunny-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+  min-height: 560px;
+  position: relative;
+  z-index: 1;
+}
+.sunny-hero-copy {
+  padding-bottom: 18px;
+  position: relative;
+  z-index: 3;
+}
+.welcome-note {
+  font-size: 29px;
+  transform: rotate(-3deg);
+  transform-origin: left;
+  margin-bottom: 22px;
+  color: #795538;
+}
+.sunny-hero h1 {
+  font-size: clamp(58px, 6vw, 83px);
+  font-weight: 550;
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+}
+.word-blue {
+  color: #2d4b8a;
+}
+.word-coral {
+  color: #c94e43;
+}
+.word-purple {
+  color: #795297;
+}
+.sunny-hero-copy > p:not(.bilingual-note) {
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 455px;
+  margin-top: 25px;
+  color: #65563c;
+}
+.sunny-buttons {
+  display: flex;
+  gap: 23px;
+  align-items: center;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.sunny-secondary {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 650;
+  border-bottom: 2px solid #cbae5d;
+  padding: 8px 0;
+}
+.sunny-secondary .icon {
+  width: 17px;
+  height: 17px;
+}
+.bilingual-note {
+  font-size: 12px;
+  color: #796c4a;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 24px;
+}
+.bilingual-note .icon {
+  width: 16px;
+  height: 16px;
+}
+.sunny-photo-world {
+  position: relative;
+  min-width: 0;
+  height: 540px;
+}
+.main-snapshot {
+  position: absolute;
+  inset: 41px 0 64px 5px;
+  background: #fffdf4;
+  border: 11px solid #fffdf4;
+  border-bottom-width: 48px;
+  border-radius: 29px;
+  transform: rotate(5deg);
+  box-shadow: 0 9px 0 #d5a84435;
+}
+.main-snapshot > img {
+  height: 100%;
+  width: 100%;
+  border-radius: 17px;
+  object-position: 65% center;
+}
+.main-snapshot > .hand-note {
+  position: absolute;
+  bottom: -39px;
+  left: auto;
+  right: 15px;
+  font-size: 23px;
+  color: #67758d;
+}
+.small-snapshot {
+  position: absolute;
+  left: -24px;
+  bottom: -5px;
+  width: 247px;
+  height: 193px;
+  transform: rotate(-10deg);
+  background: #fffdf5;
+  border: 9px solid #fffdf5;
+  border-bottom-width: 37px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px #94672920;
+}
+.small-snapshot > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+.small-snapshot > .hand-note {
+  position: absolute;
+  bottom: -29px;
+  left: 9px;
+  color: #9d625b;
+  font-size: 21px;
+}
+.happy-sun {
+  width: 145px;
+  height: 145px;
+}
+.sunny-photo-world > .happy-sun {
+  position: absolute;
+  right: -31px;
+  top: -30px;
+  z-index: 2;
+  transform: rotate(12deg);
+}
+.hero-spark {
+  position: absolute;
+  font-size: 46px;
+  color: #df6c51;
+}
+.spark-one {
+  left: -20px;
+  top: 28px;
+  transform: rotate(15deg);
+}
+.spark-two {
+  right: -9px;
+  bottom: 5px;
+  color: #6a9cba;
+  font-size: 36px;
+}
+.rainbow-doodle {
+  width: 165px;
+  height: 105px;
+  fill: none;
+  stroke-width: 15;
+  stroke-linecap: round;
+}
+.sunny-photo-world > .rainbow-doodle {
+  position: absolute;
+  right: 20px;
+  bottom: -15px;
+  transform: rotate(12deg);
+}
+.cloud {
+  position: absolute;
+  width: 127px;
+  height: 32px;
+  border-radius: 60px;
+  background: #fff1b2;
+  z-index: 0;
+}
+.cloud:before,
+.cloud:after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+  width: 57px;
+  height: 57px;
+  bottom: 0;
+  left: 18px;
+}
+.cloud:after {
+  width: 43px;
+  height: 43px;
+  left: 65px;
+}
+.cloud-one {
+  top: 20px;
+  left: 38%;
+  transform: scale(0.8);
+}
+.cloud-two {
+  bottom: 42px;
+  left: -44px;
+  transform: scale(1.3);
+  opacity: 0.6;
+}
+.hello-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 25px;
+  padding-top: 35px;
+  padding-bottom: 30px;
+  border-bottom: 2px dashed #eadfca;
+}
+.hello-strip > span {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 450;
+}
+.hello-strip b {
+  font-size: 36px;
+  line-height: 1;
+}
+.strip-flower {
+  color: #db8678;
+}
+.strip-heart {
+  color: #9484bd;
+}
+.strip-sun {
+  color: #e4a22f;
+}
+.sunny-section-title {
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 43px;
+}
+.sunny-section-title > .hand-note {
+  margin-bottom: 13px;
+  color: #ba6657;
+  transform: rotate(-2deg);
+}
+.sunny-section-title h2 {
+  font-size: 46px;
+  line-height: 1.15;
+}
+.sunny-section-title h2 span {
+  color: #cb6556;
+}
+.sunny-section-title > p {
+  font-size: 15px;
+  margin: 17px auto 0;
+  max-width: 540px;
+}
+.sunny-programs {
+  padding-top: 72px;
+  padding-bottom: 65px;
+}
+.sunny-program-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+.sunny-program {
+  text-align: center;
+  position: relative;
+  padding: 0 5px 20px;
+}
+.toy-circle {
+  width: 136px;
+  height: 136px;
+  margin: 0 auto 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 48% 52% 44% 56%/55% 44% 56% 45%;
+  background: #ffe1cc;
+  transform: rotate(-7deg);
+}
+.toy-circle svg {
+  width: 100px;
+  height: 100px;
+  transform: rotate(7deg);
+}
+.program-1 .toy-circle {
+  background: #def0e3;
+  transform: rotate(9deg);
+}
+.program-1 .toy-circle svg {
+  transform: rotate(-9deg);
+}
+.program-2 .toy-circle {
+  background: #e4edff;
+}
+.program-3 .toy-circle {
+  background: #eee3f7;
+  transform: rotate(7deg);
+}
+.sunny-program h3 {
+  font-size: 28px;
+  font-weight: 500;
+}
+.sunny-age {
+  display: inline-block;
+  background: #ffedaf;
+  border-radius: 13px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  margin-top: 12px;
+}
+.program-1 .sunny-age {
+  background: #e1efda;
+}
+.program-2 .sunny-age {
+  background: #e5edff;
+}
+.program-3 .sunny-age {
+  background: #f1e5f7;
+}
+.sunny-program p {
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 16px auto 20px;
+  max-width: 235px;
+  min-height: 74px;
+}
+.sunny-program a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #385c9b;
+  font-size: 12px;
+  font-weight: 700;
+  border-bottom: 2px solid #c7d8ec;
+  padding-bottom: 5px;
+}
+.sunny-program a .icon {
+  width: 16px;
+  height: 16px;
+}
+.sunny-programs .section-footnote {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 10px;
+  color: #8b8b7d;
+}
+.sunny-story {
+  background: #ffe9df;
+  padding: 80px 0;
+  position: relative;
+}
+.sunny-story:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: radial-gradient(circle at 14px 0, var(--cream) 12px, transparent 13px) 0 0/28px 15px
+    repeat-x;
+}
+.sunny-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.sunny-story-photo {
+  position: relative;
+  margin: 10px 25px 15px 15px;
+  padding: 12px 12px 42px;
+  background: white;
+  border-radius: 7px;
+  transform: rotate(-5deg);
+  box-shadow: 0 7px 0 #e2c0b54a;
+}
+.sunny-story-photo > img {
+  width: 100%;
+  height: 405px;
+  object-position: center 40%;
+  border-radius: 4px;
+}
+.tape {
+  position: absolute;
+  top: -20px;
+  left: 35%;
+  width: 120px;
+  height: 39px;
+  background: #ffce6cbb;
+  transform: rotate(-7deg);
+  clip-path: polygon(
+    0 5%,
+    100% 0,
+    98% 20%,
+    100% 35%,
+    98% 50%,
+    100% 65%,
+    98% 80%,
+    100% 100%,
+    0 95%,
+    2% 75%,
+    0 60%,
+    2% 40%,
+    0 25%
+  );
+}
+.paint-stamp {
+  position: absolute;
+  right: -36px;
+  bottom: -20px;
+  width: 145px;
+  height: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #a6d4e7;
+  border: 3px dashed #6eadd1;
+  border-radius: 50%;
+  font: 26px/1.1 var(--hand);
+  color: #3e6191;
+  transform: rotate(13deg);
+}
+.story-flower {
+  position: absolute;
+  left: -49px;
+  bottom: -25px;
+  font-size: 110px;
+  color: #e2a13f;
+  line-height: 1;
+}
+.sunny-story-copy > .hand-note {
+  margin-bottom: 21px;
+  font-size: 25px;
+}
+.sunny-story-copy h2 {
+  font-size: 49px;
+  line-height: 1.1;
+}
+.sunny-story-copy h2 span {
+  color: #c96359;
+  position: relative;
+}
+.sunny-story-copy h2 span:after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  border-bottom: 3px solid #e59b75;
+  border-radius: 50%;
+}
+.sunny-story-copy > p {
+  font-size: 15px;
+  line-height: 1.85;
+  margin-top: 21px;
+  color: #7d625b;
+}
+.sunny-checks {
+  padding: 0;
+  list-style: none;
+  margin: 22px 0 29px;
+  display: grid;
+  gap: 10px;
+}
+.sunny-checks li {
+  font-size: 13px;
+  color: #735b5a;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.sunny-checks li:before {
+  content: '★';
+  color: #cf8b36;
+  font-size: 15px;
+}
+.sunny-day {
+  background: #e2f3fc;
+  padding: 75px 0 65px;
+  position: relative;
+}
+.sunny-day:after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: radial-gradient(circle at 25px -5px, transparent 27px, var(--cream) 28px) 0 0/50px
+    30px repeat-x;
+}
+.sunny-day .sunny-section-title > .hand-note {
+  color: #527eaa;
+}
+.sunny-day .sunny-section-title h2 span {
+  color: #7b62a4;
+}
+.sunny-day-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 35px;
+  margin-top: 15px;
+}
+.sunny-day-grid article {
+  text-align: center;
+}
+.day-doodle {
+  height: 92px;
+  width: 92px;
+  border-radius: 50%;
+  background: #ffe192;
+  margin: 0 auto 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-8deg);
+}
+.day-doodle .icon {
+  height: 42px;
+  width: 42px;
+  color: #9b6d26;
+}
+.doodle-1 {
+  background: #e3d9f4;
+  transform: rotate(8deg);
+}
+.doodle-1 .icon {
+  color: #8e6bb3;
+}
+.doodle-2 {
+  background: #d7eac5;
+}
+.doodle-2 .icon {
+  color: #68864b;
+}
+.doodle-3 {
+  background: #ffd6c7;
+  transform: rotate(8deg);
+}
+.doodle-3 .icon {
+  color: #c56c5c;
+}
+.sunny-day-grid h3 {
+  font-size: 26px;
+  min-height: 30px;
+}
+.sunny-day-grid p {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 15px;
+  color: #5a7892;
+}
+.sunny-day .section-footnote {
+  text-align: center;
+  font-size: 10px;
+  color: #7993a5;
+  margin-top: 32px;
+}
+.sunny-parent {
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+.sunny-parent .sunny-section-title h2 span {
+  color: #6f9859;
+}
+.sunny-parent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 45px;
+}
+.sunny-parent-grid article {
+  text-align: center;
+  padding: 5px 15px;
+}
+.sunny-parent-grid article > .icon {
+  width: 39px;
+  height: 39px;
+  color: #669da9;
+  margin-bottom: 20px;
+}
+.sunny-parent-grid article:nth-child(2) > .icon {
+  color: #d5856a;
+}
+.sunny-parent-grid article:nth-child(3) > .icon {
+  color: #9d7bb3;
+}
+.sunny-parent-grid h3 {
+  font-size: 26px;
+}
+.sunny-parent-grid p {
+  font-size: 14px;
+  line-height: 1.85;
+  margin-top: 15px;
+}
+.sunny-faq {
+  background: #edf5e2;
+  padding: 68px 0 65px;
+}
+.sunny-faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 90px;
+}
+.sunny-faq .hand-note {
+  color: #7b8e55;
+  margin-bottom: 18px;
+}
+.sunny-faq h2 {
+  font-size: 46px;
+  line-height: 1.15;
+}
+.sunny-faq h2 span {
+  color: #6e9158;
+}
+.sunny-faq-grid > div > p {
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 330px;
+  margin-top: 20px;
+  color: #728164;
+}
+.sunny-faq .rainbow-doodle {
+  margin-top: 25px;
+  width: 135px;
+  height: 80px;
+  transform: rotate(-7deg);
+  opacity: 0.8;
+}
+.sunny-faq .faq-list details {
+  border-color: #ceddbb;
+  padding: 22px 0;
+}
+.sunny-faq .faq-list details:first-child {
+  padding-top: 0;
+}
+.sunny-faq .faq-list summary {
+  font-size: 15px;
+  font-weight: 550;
+  color: #4b6743;
+}
+.sunny-faq .faq-list details p {
+  font-size: 13px;
+  color: #718166;
+}
+.sunny-visit {
+  background: #ffdf6b;
+  position: relative;
+  padding: 60px 0 65px;
+  text-align: center;
+}
+.sunny-visit-inner {
+  position: relative;
+}
+.sunny-visit .hand-note {
+  color: #926841;
+  margin-bottom: 15px;
+}
+.sunny-visit h2 {
+  font-size: 72px;
+  line-height: 1.1;
+}
+.sunny-visit h2 span {
+  color: #b84d46;
+}
+.sunny-visit p {
+  font-size: 16px;
+  color: #7d693c;
+  line-height: 1.8;
+  margin: 20px 0 26px;
+}
+.sunny-visit small {
+  display: block;
+  font-size: 11px;
+  color: #8b764d;
+  margin-top: 20px;
+}
+.sunny-visit .happy-sun {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  left: 45px;
+  top: 22px;
+  transform: rotate(-15deg);
+}
+/* Carry the same welcome through booking and the staff area. */
+.booking-heading .eyebrow {
+  font: 23px var(--hand);
+  color: #c2735a;
+  letter-spacing: 0;
+}
+.booking-heading h1 {
+  font-weight: 500;
+  color: #365694;
+}
+.booking-heading p {
+  font-size: 15px;
+}
+.booking-panel {
+  border-radius: 24px;
+  border: 2px solid #dbe6f5;
+  box-shadow: 0 6px 0 #e8eef8;
+}
+.visit-info {
+  background: #e6f3fc;
+  border: 0;
+  border-radius: 22px;
+}
+.visit-info h2 {
+  color: #31538b;
+}
+.visit-info p {
+  color: #627b96;
+}
+.visit-info li .icon {
+  color: #739ec0;
+}
+.visit-info .demo-note,
+.demo-note {
+  background: #fff3c7;
+  border-color: #f3df9c;
+  color: #94733b !important;
+}
+.calendar-day {
+  background: #edf4ff;
+  color: #45699b;
+  border-radius: 12px;
+}
+.calendar-day:not(:disabled):hover {
+  background: #dce9ff;
+}
+.calendar-day.selected,
+.time-slot.selected {
+  background: #3c65b3 !important;
+}
+.calendar-day i {
+  background: #7da3d8;
+}
+.calendar-day.selected i {
+  background: #ffda60;
+}
+.today {
+  border-color: #e7c269;
+}
+.calendar-heading h3 {
+  color: #365c91;
+}
+.time-slot {
+  border-color: #cbdcf1;
+  border-radius: 12px;
+  color: #3a629c;
+}
+.time-slot:hover {
+  background: #edf4fc;
+}
+.selected-visit {
+  background: #e8f3fc;
+  border-radius: 14px;
+}
+.selected-visit span {
+  color: #6d89a4;
+}
+.selected-visit .icon {
+  color: #6592c1;
+}
+.confirmation-card {
+  background: #fff4c9;
+  border-color: #f5dd8d;
+  border-radius: 17px;
+}
+.success-icon {
+  background: #dff0d8;
+  color: #66884b;
+}
+.confirmation .eyebrow {
+  color: #b38a38;
+}
+.confirmation h2 {
+  color: #385c9b;
+}
+.step-label {
+  color: #7290b4;
+}
+.step-label > span {
+  color: #7290b4;
+}
+input,
+select,
+textarea {
+  border-color: #d6e0ed;
+  border-radius: 11px;
+  color: #3e5c85;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #91a0b4;
+}
+.microcopy {
+  color: #8195ae;
+}
+.tag {
+  color: #7b94ae;
+}
+.admin-shell {
+  background: #f4f7fc;
+}
+.admin-sidebar {
+  background: #fffdf7;
+  border-color: #e0e7f3;
+}
+.admin-sidebar .brand .brand-logo {
+  width: 187px;
+  height: 78px;
+}
+.admin-sidebar nav button.active {
+  background: #e0ecff;
+  color: #325b9b;
+}
+.admin-sidebar nav button > span {
+  background: #cbdcf8;
+}
+.admin-sidebar nav button {
+  color: #7087a4;
+}
+.sidebar-label {
+  color: #8396b4;
+}
+.sidebar-panda {
+  background: #fff0b7;
+}
+.sidebar-bottom > a {
+  color: #647e9f;
+}
+.admin-header {
+  background: #fffdf7;
+  border-color: #dce6f3;
+}
+.admin-header > span:first-of-type {
+  color: #7c8da5;
+}
+.admin-avatar {
+  background: #ffdf6b;
+  color: #655523;
+}
+.admin-demo {
+  background: #fff1be;
+  border-color: #f2df9f;
+}
+.admin-demo strong {
+  color: #89672e;
+}
+.admin-demo span {
+  color: #9b804f;
+}
+.admin-demo > .icon {
+  color: #ca9b40;
+}
+.admin-title h1 {
+  color: #365b9b;
+}
+.admin-title .eyebrow {
+  color: #90a1bb;
+}
+.stat-grid article,
+.admin-card {
+  background: #fffefa;
+  border-color: #dee6f3;
+  border-radius: 18px;
+}
+.stat-grid article > span {
+  color: #7a8eaa;
+}
+.stat-grid small {
+  color: #8da0b9;
+}
+.date-tile {
+  background: #e8f1ff;
+  color: #365b9b;
+  border-radius: 13px;
+}
+.date-tile span {
+  color: #8ba2c3;
+}
+.booking-person > span,
+.booking-person > small {
+  color: #8195b0;
+}
+.booking-row {
+  border-color: #e6edf6;
+}
+.booking-when > span {
+  color: #879ab4;
+}
+.status.confirmed {
+  background: #e3f1d8;
+  color: #66864c;
+}
+.status.cancelled {
+  background: #fce5dd;
+  color: #b57160;
+}
+.filter-row {
+  border-color: #dfe8f5;
+}
+.filter-row button {
+  color: #8c9db6;
+}
+.filter-row button.active {
+  color: #365c9b;
+}
+.filter-row button.active:after {
+  background: #4b73b8;
+}
+.search {
+  background: #f3f7fd;
+}
+.small-button {
+  border-color: #d5e0f1;
+  border-radius: 12px;
+  color: #5f7ea8;
+}
+.schedule-row {
+  border-color: #e2eaf6;
+}
+.settings-grid {
+  background: #eef5ff;
+  border-color: #dee8f6;
+}
+.availability-tip {
+  background: #e6f1df;
+  border-radius: 18px;
+}
+.availability-tip h3 {
+  color: #65824d;
+}
+.availability-tip p {
+  color: #7d9370;
+}
+.admin-footer {
+  border-color: #e1e8f4;
+  color: #8ca0bc;
+}
+.text-button {
+  color: #597caf;
+}
+.danger {
+  background: #bd5c51;
+  box-shadow: 0 4px 0 #93483f;
+}
+.danger:hover:not(:disabled) {
+  background: #a64a42;
+}
+.admin-tabs-mobile button {
+  border-color: #cbdcf3;
+}
+.admin-tabs-mobile button.active {
+  background: #3d65ac;
+  border-color: #3d65ac;
+}
+#toast {
+  background: #355c9c;
+}
+@media (max-width: 1100px) {
+  .brand .brand-logo {
+    width: 165px;
+    height: 65px;
+  }
+  .header-inner nav {
+    gap: 19px;
+    font-size: 12px;
+  }
+  .header-actions {
+    gap: 17px;
+  }
+  .sunny-hero {
+    padding-top: 40px;
+    padding-bottom: 65px;
+  }
+  .sunny-hero-grid {
+    gap: 20px;
+    min-height: 520px;
+  }
+  .sunny-hero h1 {
+    font-size: 68px;
+  }
+  .sunny-photo-world {
+    height: 490px;
+  }
+  .main-snapshot {
+    inset: 40px 4px 65px 5px;
+  }
+  .small-snapshot {
+    width: 213px;
+    height: 168px;
+    left: -5px;
+  }
+  .sunny-photo-world > .happy-sun {
+    width: 125px;
+    height: 125px;
+    right: -11px;
+    top: -15px;
+  }
+  .sunny-photo-world > .rainbow-doodle {
+    width: 130px;
+    right: 0;
+  }
+  .sunny-hero-copy > p:not(.bilingual-note) {
+    font-size: 15px;
+  }
+  .sunny-buttons {
+    gap: 18px;
+  }
+  .sunny-buttons .button {
+    font-size: 13px;
+    padding-inline: 22px;
+  }
+  .sunny-secondary {
+    font-size: 12px;
+  }
+  .hello-strip > span {
+    font-size: 18px;
+  }
+  .sunny-program-grid {
+    gap: 20px;
+  }
+  .sunny-program h3 {
+    font-size: 26px;
+  }
+  .sunny-program p {
+    font-size: 13px;
+  }
+  .sunny-story-grid {
+    gap: 65px;
+  }
+  .sunny-story-photo > img {
+    height: 385px;
+  }
+  .sunny-story-copy h2 {
+    font-size: 43px;
+  }
+  .sunny-story-copy > p {
+    font-size: 14px;
+  }
+  .sunny-section-title h2 {
+    font-size: 42px;
+  }
+  .sunny-faq-grid {
+    gap: 60px;
+  }
+  .sunny-faq h2 {
+    font-size: 40px;
+  }
+  .sunny-day-grid {
+    gap: 25px;
+  }
+  .sunny-day-grid h3 {
+    font-size: 24px;
+  }
+  .sunny-day-grid p {
+    font-size: 13px;
+  }
+  .sunny-visit .happy-sun {
+    left: 20px;
+  }
+  .admin-sidebar .brand .brand-logo {
+    width: 167px;
+    height: 65px;
+  }
+}
+@media (max-width: 850px) {
+  .header-inner {
+    height: 90px;
+  }
+  .header-inner nav {
+    top: 90px;
+    background: #fffdf7;
+  }
+  .header-actions .button {
+    font-size: 12px;
+  }
+  .sunny-hero h1 {
+    font-size: 57px;
+  }
+  .sunny-hero-grid {
+    min-height: 500px;
+    gap: 15px;
+  }
+  .welcome-note {
+    font-size: 25px;
+  }
+  .sunny-photo-world {
+    height: 445px;
+  }
+  .main-snapshot {
+    inset: 35px 0 65px 0;
+    border-width: 8px;
+    border-bottom-width: 40px;
+    border-radius: 23px;
+  }
+  .main-snapshot > .hand-note {
+    font-size: 20px;
+    bottom: -34px;
+  }
+  .main-snapshot > img {
+    border-radius: 13px;
+  }
+  .small-snapshot {
+    width: 190px;
+    height: 156px;
+    left: -5px;
+    bottom: -1px;
+    border-width: 7px;
+    border-bottom-width: 33px;
+  }
+  .small-snapshot > .hand-note {
+    font-size: 19px;
+    bottom: -28px;
+  }
+  .sunny-photo-world > .happy-sun {
+    width: 108px;
+    height: 108px;
+    right: -17px;
+    top: -12px;
+  }
+  .sunny-photo-world > .rainbow-doodle {
+    width: 116px;
+    height: 80px;
+    right: -8px;
+    bottom: -13px;
+  }
+  .hero-spark {
+    font-size: 32px;
+  }
+  .spark-one {
+    left: -10px;
+    top: 16px;
+  }
+  .spark-two {
+    right: -8px;
+    bottom: 30px;
+    font-size: 28px;
+  }
+  .sunny-hero-copy > p:not(.bilingual-note) {
+    font-size: 14px;
+    margin-top: 23px;
+  }
+  .sunny-buttons {
+    margin-top: 25px;
+    gap: 15px;
+  }
+  .sunny-buttons .button {
+    font-size: 12px;
+    min-height: 48px;
+  }
+  .sunny-secondary {
+    font-size: 12px;
+  }
+  .bilingual-note {
+    font-size: 10px;
+  }
+  .hello-strip {
+    gap: 20px;
+    padding-top: 28px;
+    padding-bottom: 25px;
+  }
+  .hello-strip > span {
+    font-size: 16px;
+    gap: 8px;
+  }
+  .hello-strip b {
+    font-size: 28px;
+  }
+  .sunny-section-title h2 {
+    font-size: 37px;
+  }
+  .sunny-section-title > .hand-note {
+    font-size: 24px;
+  }
+  .sunny-program-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 35px;
+  }
+  .sunny-program p {
+    max-width: 260px;
+    min-height: 46px;
+  }
+  .sunny-program {
+    padding-bottom: 5px;
+  }
+  .sunny-programs {
+    padding-top: 55px;
+    padding-bottom: 50px;
+  }
+  .sunny-story {
+    padding-block: 60px;
+  }
+  .sunny-story-grid {
+    gap: 38px;
+    grid-template-columns: 1fr 1.05fr;
+  }
+  .sunny-story-copy h2 {
+    font-size: 36px;
+  }
+  .sunny-story-copy > .hand-note {
+    font-size: 22px;
+  }
+  .sunny-story-copy > p {
+    font-size: 13px;
+    margin-top: 18px;
+  }
+  .sunny-story-photo {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 10px 35px;
+  }
+  .sunny-story-photo > img {
+    height: 360px;
+  }
+  .paint-stamp {
+    width: 115px;
+    height: 115px;
+    font-size: 23px;
+    right: -21px;
+  }
+  .story-flower {
+    left: -29px;
+    font-size: 86px;
+  }
+  .sunny-checks li {
+    font-size: 12px;
+  }
+  .sunny-story-copy .button {
+    font-size: 12px;
+  }
+  .sunny-day {
+    padding-block: 60px;
+  }
+  .sunny-day-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+  }
+  .sunny-day-grid article {
+    max-width: 290px;
+    margin: auto;
+  }
+  .sunny-day-grid h3 {
+    font-size: 25px;
+  }
+  .sunny-day-grid p {
+    font-size: 14px;
+  }
+  .sunny-parent-grid {
+    gap: 20px;
+  }
+  .sunny-parent-grid article {
+    padding-inline: 0;
+  }
+  .sunny-parent-grid h3 {
+    font-size: 24px;
+  }
+  .sunny-parent-grid p {
+    font-size: 13px;
+  }
+  .sunny-faq-grid {
+    gap: 40px;
+  }
+  .sunny-faq h2 {
+    font-size: 35px;
+  }
+  .sunny-faq .hand-note {
+    font-size: 23px;
+  }
+  .sunny-faq-grid > div > p {
+    font-size: 13px;
+  }
+  .sunny-faq .faq-list summary {
+    font-size: 13px;
+  }
+  .sunny-faq .faq-list details p {
+    font-size: 12px;
+  }
+  .sunny-visit .happy-sun {
+    width: 95px;
+    height: 95px;
+    left: 10px;
+    top: 45px;
+  }
+  .sunny-visit h2 {
+    font-size: 63px;
+  }
+  .admin-sidebar .brand .brand-logo {
+    width: 150px;
+    height: 62px;
+  }
+  .footer-grid {
+    gap: 30px;
+  }
+  .booking-heading h1 {
+    font-size: 47px;
+  }
+}
+@media (max-width: 600px) {
+  .announcement {
+    font-size: 11px;
+    min-height: 31px;
+  }
+  .header-inner {
+    height: 81px;
+  }
+  .brand .brand-logo {
+    width: 170px;
+    height: 64px;
+  }
+  .header-actions {
+    gap: 12px;
+  }
+  .header-inner nav {
+    top: 81px;
+  }
+  .header-inner nav.open {
+    font-size: 16px;
+    padding-block: 22px;
+  }
+  .language {
+    padding: 2px 7px;
+  }
+  .language button {
+    font-size: 11px;
+  }
+  .menu-toggle {
+    width: 27px;
+    height: 32px;
+  }
+  .sunny-hero {
+    padding-top: 32px;
+    padding-bottom: 62px;
+  }
+  .sunny-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    min-height: 0;
+  }
+  .sunny-hero-copy {
+    text-align: center;
+    padding: 0;
+  }
+  .welcome-note {
+    font-size: 27px;
+    transform-origin: center;
+    transform: rotate(-3deg);
+    margin-bottom: 19px;
+  }
+  .sunny-hero h1 {
+    font-size: clamp(56px, 14vw, 73px);
+    line-height: 1.02;
+  }
+  .sunny-hero-copy > p:not(.bilingual-note) {
+    font-size: 15px;
+    max-width: 345px;
+    margin: 22px auto 0;
+    line-height: 1.75;
+  }
+  .sunny-buttons {
+    justify-content: center;
+    gap: 21px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+  .sunny-buttons .button {
+    font-size: 14px;
+    min-height: 49px;
+    padding: 14px 22px;
+  }
+  .sunny-secondary {
+    font-size: 12px;
+    padding: 7px 0;
+  }
+  .bilingual-note {
+    justify-content: center;
+    margin-top: 21px;
+    font-size: 11px;
+    gap: 6px;
+  }
+  .bilingual-note .icon {
+    width: 14px;
+    height: 14px;
+  }
+  .sunny-photo-world {
+    height: 378px;
+    max-width: 410px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .main-snapshot {
+    inset: 19px 8px 48px 16px;
+    border-width: 8px;
+    border-bottom-width: 35px;
+    border-radius: 21px;
+    transform: rotate(4deg);
+  }
+  .main-snapshot > .hand-note {
+    font-size: 21px;
+    bottom: -30px;
+  }
+  .main-snapshot > img {
+    border-radius: 12px;
+    object-position: 60% center;
+  }
+  .small-snapshot {
+    width: 176px;
+    height: 143px;
+    bottom: -11px;
+    left: 0;
+    border-width: 6px;
+    border-bottom-width: 28px;
+    transform: rotate(-9deg);
+  }
+  .small-snapshot > .hand-note {
+    font-size: 18px;
+    bottom: -25px;
+  }
+  .sunny-photo-world > .happy-sun {
+    width: 100px;
+    height: 100px;
+    right: -12px;
+    top: -23px;
+  }
+  .sunny-photo-world > .rainbow-doodle {
+    width: 127px;
+    height: 80px;
+    right: 7px;
+    bottom: -17px;
+  }
+  .spark-one {
+    top: 3px;
+    left: 0;
+    font-size: 29px;
+  }
+  .spark-two {
+    bottom: 3px;
+    right: -1px;
+    font-size: 27px;
+  }
+  .cloud-one {
+    left: -45px;
+    top: 270px;
+    transform: scale(0.7);
+  }
+  .cloud-two {
+    display: none;
+  }
+  .hello-strip {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 13px 24px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+  .hello-strip > span {
+    font-size: 16px;
+    gap: 7px;
+  }
+  .hello-strip b {
+    font-size: 26px;
+  }
+  .hello-strip > span:last-child {
+    width: 100%;
+    justify-content: center;
+  }
+  .sunny-section-title {
+    margin-bottom: 30px;
+  }
+  .sunny-section-title > .hand-note {
+    font-size: 23px;
+    margin-bottom: 12px;
+  }
+  .sunny-section-title h2 {
+    font-size: 35px;
+    line-height: 1.15;
+  }
+  .sunny-section-title > p {
+    font-size: 14px;
+    line-height: 1.75;
+    margin-top: 16px;
+  }
+  .sunny-program-grid {
+    gap: 30px 18px;
+  }
+  .toy-circle {
+    width: 112px;
+    height: 112px;
+    margin-bottom: 18px;
+  }
+  .toy-circle svg {
+    width: 87px;
+    height: 87px;
+  }
+  .sunny-program h3 {
+    font-size: 25px;
+    line-height: 1.1;
+    min-height: 28px;
+  }
+  .sunny-age {
+    font-size: 9px;
+    padding: 3px 8px;
+    margin-top: 9px;
+    line-height: 1.7;
+  }
+  .sunny-program p {
+    font-size: 13px;
+    line-height: 1.75;
+    margin-top: 13px;
+    margin-bottom: 15px;
+    min-height: 90px;
+  }
+  .sunny-program a {
+    font-size: 11px;
+    gap: 6px;
+  }
+  .sunny-program a .icon {
+    width: 14px;
+    height: 14px;
+  }
+  .sunny-programs .section-footnote {
+    font-size: 9px;
+    margin-top: 28px;
+  }
+  .sunny-story {
+    padding: 50px 0;
+  }
+  .sunny-story-grid {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+  .sunny-story-photo {
+    margin: 10px 30px 10px 15px;
+    padding: 10px 10px 35px;
+  }
+  .sunny-story-photo > img {
+    height: 350px;
+    object-position: center 35%;
+  }
+  .paint-stamp {
+    width: 118px;
+    height: 118px;
+    font-size: 24px;
+    bottom: -27px;
+    right: -27px;
+  }
+  .story-flower {
+    font-size: 88px;
+    left: -27px;
+    bottom: -18px;
+  }
+  .tape {
+    width: 100px;
+    height: 32px;
+    top: -16px;
+  }
+  .sunny-story-copy > .hand-note {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .sunny-story-copy h2 {
+    font-size: 39px;
+  }
+  .sunny-story-copy > p {
+    font-size: 14px;
+    line-height: 1.85;
+  }
+  .sunny-checks {
+    gap: 10px;
+    margin: 22px 0 26px;
+  }
+  .sunny-checks li {
+    font-size: 12px;
+  }
+  .sunny-story-copy .button {
+    font-size: 13px;
+  }
+  .sunny-day {
+    padding: 50px 0;
+  }
+  .sunny-day-grid {
+    gap: 29px 20px;
+  }
+  .day-doodle {
+    width: 73px;
+    height: 73px;
+    margin-bottom: 20px;
+  }
+  .day-doodle .icon {
+    width: 34px;
+    height: 34px;
+  }
+  .sunny-day-grid h3 {
+    font-size: 24px;
+    min-height: 54px;
+    line-height: 1.15;
+  }
+  .sunny-day-grid p {
+    font-size: 13px;
+    line-height: 1.75;
+    margin-top: 12px;
+  }
+  .sunny-day .section-footnote {
+    font-size: 9px;
+    margin-top: 26px;
+  }
+  .sunny-parent {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .sunny-parent-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .sunny-parent-grid article {
+    max-width: 320px;
+    margin: auto;
+  }
+  .sunny-parent-grid article > .icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+  }
+  .sunny-parent-grid h3 {
+    font-size: 28px;
+  }
+  .sunny-parent-grid p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 12px;
+  }
+  .sunny-faq {
+    padding: 46px 0;
+  }
+  .sunny-faq-grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+  .sunny-faq h2 {
+    font-size: 38px;
+  }
+  .sunny-faq .hand-note {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .sunny-faq-grid > div > p {
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 340px;
+    margin-top: 17px;
+  }
+  .sunny-faq .rainbow-doodle {
+    display: none;
+  }
+  .sunny-faq .faq-list summary {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .sunny-faq .faq-list details p {
+    font-size: 13px;
+    line-height: 1.85;
+    padding-right: 10px;
+  }
+  .sunny-faq .faq-list details {
+    padding-block: 20px;
+  }
+  .sunny-visit {
+    padding: 100px 0 45px;
+  }
+  .sunny-visit .happy-sun {
+    left: calc(50% - 44px);
+    top: -85px;
+    width: 88px;
+    height: 88px;
+    transform: rotate(8deg);
+  }
+  .sunny-visit .hand-note {
+    font-size: 23px;
+    margin-bottom: 13px;
+  }
+  .sunny-visit h2 {
+    font-size: 55px;
+  }
+  .sunny-visit p {
+    font-size: 15px;
+    margin-block: 18px 24px;
+  }
+  .sunny-visit small {
+    font-size: 10px;
+    margin-top: 19px;
+  }
+  .sunny-visit .button {
+    font-size: 14px;
+  }
+  .footer-grid .brand .brand-logo {
+    width: 180px;
+    height: 66px;
+  }
+  .footer-grid p,
+  .footer-grid a:not(.brand) {
+    font-size: 12px;
+  }
+  .footer-grid small {
+    font-size: 9px;
+  }
+  .footer-note {
+    border-radius: 19px;
+  }
+  .footer-bottom {
+    font-size: 9px;
+  }
+  .booking-heading h1 {
+    font-size: 38px;
+  }
+  .booking-heading .eyebrow {
+    font-size: 22px;
+  }
+  .booking-heading p {
+    font-size: 13px;
+  }
+  .booking-panel {
+    padding: 25px 20px;
+    border-radius: 20px;
+  }
+  .visit-info {
+    border-radius: 17px;
+  }
+  .booking-panel .button {
+    font-size: 13px;
+  }
+  .admin-title .button {
+    font-size: 11px;
+  }
+  .admin-main .button {
+    border-radius: 25px;
+  }
+  .admin-card,
+  .stat-grid article {
+    border-radius: 15px;
+  }
+  .admin-mobile-brand {
+    color: #4063a2;
+  }
+  .settings-grid {
+    border-radius: 0;
+  }
+  .sunny-day-grid article {
+    align-self: start;
+  }
+}
+@media (max-width: 360px) {
+  .brand .brand-logo {
+    width: 150px;
+  }
+  .sunny-hero h1 {
+    font-size: 52px;
+  }
+  .sunny-photo-world {
+    height: 350px;
+  }
+  .sunny-program h3 {
+    font-size: 23px;
+  }
+  .sunny-age {
+    font-size: 8px;
+  }
+  .sunny-program p {
+    min-height: 115px;
+  }
+  .sunny-buttons {
+    gap: 16px;
+  }
+  .hello-strip {
+    column-gap: 15px;
+  }
+  .hello-strip > span {
+    font-size: 15px;
+  }
+}

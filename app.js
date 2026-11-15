@@ -70,7 +70,7 @@ function icon(name, cls = '') {
   return `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.leaf}</svg>`;
 }
 function brand() {
-  return `<a class="brand" href="#/" aria-label="Little Panda Daycare"><img src="assets/favicon.svg" alt="" width="52" height="52"><span>little panda<small>D A Y C A R E</small></span></a>`;
+  return `<a class="brand" href="#/" aria-label="Little Panda Daycare"><img class="brand-logo" src="assets/logo.png" alt="Little Panda Daycare" width="2149" height="733"></a>`;
 }
 const programs = () => [
   {
@@ -134,144 +134,165 @@ function btn(text, href = '#/book', cls = 'primary') {
   return `<a class="button ${cls}" href="${href}">${text}${icon('arrow')}</a>`;
 }
 function header() {
-  return `<div class="announcement">${icon('leaf')} ${T('Little hearts. Big possibilities.', 'Pequeños corazones. Grandes posibilidades.')} <span>${T('Care in English & Spanish', 'Cuidado en inglés y español')}</span></div><header class="site-header"><div class="container header-inner">${brand()}<nav id="nav" aria-label="${T('Main navigation', 'Navegación principal')}"><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/programs">${T('Our programs', 'Programas')}</a><a href="#/day">${T('A day here', 'Un día aquí')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas')}</a></nav><div class="header-actions"><div class="language" aria-label="${T('Language', 'Idioma')}"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button><span>/</span><button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div>${btn(T('Book a tour', 'Agenda una visita'))}<button class="menu-toggle icon-button" id="menu-toggle" aria-label="${T('Open menu', 'Abrir menú')}" aria-expanded="false">${icon('menu')}</button></div></div></header>`;
+  return `<div class="announcement">${icon('sun')} ${T('A little play. A lot of happy.', 'Un poco de juego. Mucha alegría.')} <span>${T('Care in English & Spanish', 'Cuidado en inglés y español')}</span></div><header class="site-header"><div class="container header-inner">${brand()}<nav id="nav" aria-label="${T('Main navigation', 'Navegación principal')}"><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/programs">${T('Our programs', 'Programas')}</a><a href="#/day">${T('A day here', 'Un día aquí')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas')}</a></nav><div class="header-actions"><div class="language" aria-label="${T('Language', 'Idioma')}"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button><span>/</span><button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div>${btn(T('Book a tour', 'Agenda una visita'))}<button class="menu-toggle icon-button" id="menu-toggle" aria-label="${T('Open menu', 'Abrir menú')}" aria-expanded="false">${icon('menu')}</button></div></div></header>`;
 }
 function footer() {
-  return `<footer><div class="container footer-grid"><div>${brand()}<p>${T('A little wonder. A lot of love.', 'Un poco de asombro. Mucho amor.')}<br>${T('A beautiful beginning starts here.', 'Un hermoso comienzo empieza aquí.')}</p></div><div><strong>${T('Come explore', 'Ven a explorar')}</strong><a href="#/programs">${T('Our programs', 'Nuestros programas')}</a><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas frecuentes')}</a></div><div><strong>${T('Let’s connect', 'Conectemos')}</strong><a href="#/book">${T('Schedule your visit', 'Agenda tu visita')}</a><a href="tel:+18474558687">847-455-8687</a><small>${T('Honey Bear family contact · New location details coming soon', 'Contacto de la familia Honey Bear · Nueva dirección próximamente')}</small></div><div class="footer-note">${icon('globe')}<strong>${T('Every family belongs.', 'Cada familia tiene su lugar.')}</strong><p>${T('We speak English. Hablamos español.', 'Hablamos español. We speak English.')}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Little Panda Daycare</span><span>${T('Demo · Stock photography · Program details subject to confirmation', 'Demo · Fotos de archivo · Detalles de programas por confirmar')}</span><a href="#/admin">${T('Staff demo', 'Demo del personal')} ↗</a></div></footer>`;
+  return `<footer><div class="container footer-grid"><div>${brand()}<p>${T('See you soon, little sunshine!', '¡Hasta pronto, rayito de sol!')}<br>${T('A beautiful beginning starts here.', 'Un hermoso comienzo empieza aquí.')}</p></div><div><strong>${T('Come explore', 'Ven a explorar')}</strong><a href="#/programs">${T('Our programs', 'Nuestros programas')}</a><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas frecuentes')}</a></div><div><strong>${T('Let’s connect', 'Conectemos')}</strong><a href="#/book">${T('Schedule your visit', 'Agenda tu visita')}</a><a href="tel:+18474558687">847-455-8687</a><small>${T('Honey Bear family contact · New location details coming soon', 'Contacto de la familia Honey Bear · Nueva dirección próximamente')}</small></div><div class="footer-note">${icon('globe')}<strong>${T('Every family belongs.', 'Cada familia tiene su lugar.')}</strong><p>${T('We speak English. Hablamos español.', 'Hablamos español. We speak English.')}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Little Panda Daycare</span><span>${T('Demo · Stock photography · Program details subject to confirmation', 'Demo · Fotos de archivo · Detalles de programas por confirmar')}</span><a href="#/admin">${T('Staff demo', 'Demo del personal')} ↗</a></div></footer>`;
 }
 function home() {
-  return `${header()}<main id="main"><section class="hero container"><div class="hero-copy"><div class="eyebrow"><span class="tiny-flower">✳</span> ${T('A HAPPY PLACE TO GROW', 'UN LUGAR FELIZ PARA CRECER')}</div><h1>${T('Little moments.<br>Big <span>beginnings.</span>', 'Pequeños momentos.<br>Grandes <span>comienzos.</span>')}</h1><p>${T('A nurturing little world where your child feels safe, loved, and free to be wonderfully themselves. Let’s grow something beautiful, together.', 'Un pequeño mundo lleno de cariño donde tu hijo se siente seguro, amado y libre de ser quien es. Crezcamos juntos, con alegría.')}</p><div class="hero-buttons">${btn(T('Come meet your panda family', 'Conoce a tu familia panda'))}<a class="text-link" href="#/programs">${T('Explore our programs', 'Explora los programas')} ${icon('arrow')}</a></div><div class="hero-meta"><span>${icon('heart')}${T('Family-centered care', 'Cuidado centrado en la familia')}</span><span>${icon('globe')}${T('English & Spanish', 'Inglés y español')}</span></div></div><div class="hero-art"><div class="sun-doodle" aria-hidden="true">☀</div><img class="hero-photo" src="assets/classroom.jpg" alt="${T('A teacher sharing a story with a group of curious children — illustrative stock photo', 'Una maestra lee un cuento con niños curiosos — foto de archivo ilustrativa')}" fetchpriority="high" width="1600" height="1067"><span class="photo-sticker"><span>♡</span>${T('Small steps.<br>Extraordinary things.', 'Pequeños pasos.<br>Cosas extraordinarias.')}</span><div class="panda-badge"><img src="assets/favicon.svg" alt="" width="72" height="72"><div>${T('Their happy place.', 'Su lugar feliz.')}<small>${T('Your peace of mind.', 'Tu tranquilidad.')}</small></div></div><span class="scribble" aria-hidden="true">〰</span></div></section><div class="values-ribbon"><div class="container"><span>✳ ${T('LEARN THROUGH PLAY', 'APRENDER JUGANDO')}</span><span>♡ ${T('GROW WITH LOVE', 'CRECER CON AMOR')}</span><span>☀ ${T('MAKE LITTLE DISCOVERIES', 'HACER PEQUEÑOS DESCUBRIMIENTOS')}</span><span>✿ ${T('BELONG TOGETHER', 'CREAR COMUNIDAD')}</span></div></div>
-<section class="section container" id="programs"><div class="section-heading"><div><div class="eyebrow">${T('ROOM FOR EVERY LITTLE PERSONALITY', 'ESPACIO PARA CADA PERSONALIDAD')}</div><h2>${T('Growing at their own <em>pace.</em>', 'Creciendo a su propio <em>ritmo.</em>')}</h2></div><p>${T('From first smiles to big-kid adventures, a thoughtful next step for every stage.', 'Desde las primeras sonrisas hasta las grandes aventuras, acompañamos cada etapa.')}</p></div><div class="program-grid">${programs()
+  const rainbow = `<svg class="rainbow-doodle" viewBox="0 0 210 125" aria-hidden="true"><path d="M20 110a85 85 0 0 1 170 0" stroke="#f47b70"/><path d="M40 110a65 65 0 0 1 130 0" stroke="#ffc640"/><path d="M60 110a45 45 0 0 1 90 0" stroke="#65b7d0"/></svg>`;
+  const sun = `<svg class="happy-sun" viewBox="0 0 160 160" aria-hidden="true"><g stroke="#ed9e20" stroke-width="7" stroke-linecap="round"><path d="M80 8v12m0 120v12M8 80h12m120 0h12M29 29l9 9m84 84 9 9M29 131l9-9m84-84 9-9"/></g><circle cx="80" cy="80" r="45" fill="#ffc83d"/><path d="M62 73q5-8 10 0m16 0q5-8 10 0" fill="none" stroke="#59402f" stroke-width="3" stroke-linecap="round"/><path d="M68 88q12 17 24 0" fill="#dc6e56" stroke="#59402f" stroke-width="2" stroke-linejoin="round"/><ellipse cx="55" cy="85" rx="7" ry="4" fill="#f89569"/><ellipse cx="105" cy="85" rx="7" ry="4" fill="#f89569"/></svg>`;
+  const toyIcons = [
+    `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M40 27v-8q10-9 20 0v8" fill="#ffba90" stroke="#704c46" stroke-width="3"/><rect x="32" y="29" width="36" height="57" rx="13" fill="#fffdf1" stroke="#704c46" stroke-width="3" transform="rotate(12 50 55)"/><path d="m39 47 25 5m-25 6 9 2m-11 8 9 2" stroke="#7ac7d2" stroke-width="4" stroke-linecap="round"/><path d="m72 22 3-6m3 16 8-1" stroke="#e57964" stroke-width="3" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 100 100" aria-hidden="true"><rect x="13" y="49" width="37" height="37" rx="5" fill="#fbbe43" stroke="#7a592c" stroke-width="2" transform="rotate(-8 30 65)"/><rect x="54" y="46" width="35" height="39" rx="5" fill="#ef887a" stroke="#99544e" stroke-width="2" transform="rotate(7 70 65)"/><rect x="34" y="12" width="35" height="35" rx="5" fill="#7dbbde" stroke="#527c9b" stroke-width="2" transform="rotate(6 50 30)"/><path d="m44 34 7-13 7 13m-11-4h9" fill="none" stroke="white" stroke-width="3"/><circle cx="30" cy="68" r="8" fill="none" stroke="white" stroke-width="3"/><path d="m64 58 12 1-7 16Z" fill="none" stroke="white" stroke-width="3"/></svg>`,
+    `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="m20 75 15-5 45-45-13-13-45 45Z" fill="#f8c447" stroke="#8a672a" stroke-width="2"/><path d="m22 57 13 13-15 5Z" fill="#ffe7c4"/><path d="m65 14 5-5q5-4 10 1l9 9q4 5-1 9l-6 5Z" fill="#ef8e90"/><path d="m42 61 29-29m-37 21 29-29" stroke="#fff0b8" stroke-width="3"/><path d="M43 86q20-14 40-3" fill="none" stroke="#7dbbde" stroke-width="4" stroke-linecap="round"/></svg>`,
+    `<svg viewBox="0 0 100 100" aria-hidden="true"><path d="M38 27v-8q12-12 24 0v8" fill="none" stroke="#8d6c98" stroke-width="6"/><rect x="22" y="23" width="56" height="63" rx="18" fill="#b59bce" stroke="#796488" stroke-width="2"/><path d="M24 46q26 14 52 0" fill="none" stroke="#8a749d" stroke-width="3"/><rect x="34" y="55" width="32" height="21" rx="7" fill="#ffdf72"/><path d="m45 35 5-9 5 9-5 7Z" fill="#fff7d8"/></svg>`,
+  ];
+  const names = [
+    T('Babies', 'Bebés'),
+    T('Toddlers', 'Pequeñitos'),
+    T('Preschool', 'Preescolar'),
+    T('School-age kids', 'Escolares'),
+  ];
+  const blurbs = [
+    T(
+      'Cuddles, cozy routines, and those wonderful first discoveries.',
+      'Abrazos, rutinas tranquilas y esos primeros descubrimientos.',
+    ),
+    T(
+      'Little hands, big ideas, and so much to explore together.',
+      'Manitas pequeñas, grandes ideas y mucho por explorar.',
+    ),
+    T(
+      'Paint, play, make friends. And get ready for the next big step!',
+      'Pintar, jugar, hacer amigos. ¡Y prepararse para el siguiente paso!',
+    ),
+    T(
+      'A friendly spot for homework, new friends, and after-school fun.',
+      'Un lugar para las tareas, los amigos y la diversión después de clases.',
+    ),
+  ];
+  const faqs = [
+    [
+      T('Can we come and look around?', '¿Podemos visitar el centro?'),
+      T(
+        'Yes! Pick an available time and come meet us. Bring your child, ask your questions, and see how it feels. There’s no commitment to enroll.',
+        '¡Sí! Elige un horario disponible y ven a conocernos. Trae a tu hijo, haz tus preguntas y conoce el ambiente. No hay compromiso de inscripción.',
+      ),
+    ],
+    [
+      T('What ages are the programs for?', '¿Para qué edades son los programas?'),
+      T(
+        'This demo includes care from 6 weeks through school age, inspired by the Honey Bear programs. Exact ages and availability at Little Panda will be confirmed before enrollment.',
+        'Esta demo incluye cuidado desde las 6 semanas hasta la edad escolar, inspirado en los programas de Honey Bear. Las edades y disponibilidad de Little Panda se confirmarán antes de la inscripción.',
+      ),
+    ],
+    [
+      T('Do you speak Spanish?', '¿Hablan español?'),
+      T(
+        '¡Sí! Explore the website and book your visit in English or Spanish. Tell us your preferred language when you book, and ask about classroom language options when we meet.',
+        '¡Sí! Explora el sitio y reserva tu visita en español o inglés. Indica tu idioma preferido al reservar y pregunta por los idiomas del salón durante tu visita.',
+      ),
+    ],
+    [
+      T('How much does care cost?', '¿Cuánto cuesta el cuidado?'),
+      T(
+        'Rates depend on your child’s age and the schedule you need. We can talk through tuition, enrollment fees, and available assistance during your visit.',
+        'Las tarifas dependen de la edad de tu hijo y del horario que necesitas. Durante la visita hablaremos de las tarifas, cuotas de inscripción y ayuda disponible.',
+      ),
+    ],
+    [
+      T('Where are you, and when are you open?', '¿Dónde están y cuál es el horario?'),
+      T(
+        'The new Little Panda address and opening hours are coming soon. For now, the phone number is the existing Honey Bear family contact. The tour calendar is for demonstration.',
+        'La nueva dirección y el horario de Little Panda estarán disponibles pronto. Por ahora, el teléfono es el contacto actual de Honey Bear. El calendario de visitas es de demostración.',
+      ),
+    ],
+  ];
+  return `${header()}<main id="main"><div id="sunny-home">
+  <section class="sunny-hero"><div class="cloud cloud-one" aria-hidden="true"></div><div class="cloud cloud-two" aria-hidden="true"></div><div class="container sunny-hero-grid"><div class="sunny-hero-copy"><span class="hand-note welcome-note">${T('Hello, little sunshine!', '¡Hola, rayito de sol!')}</span><h1>${T('<span class="word-blue">Happy little</span><br><span class="word-coral">days.</span> <span class="word-blue">Bright</span><br><span class="word-purple">big futures.</span>', '<span class="word-blue">Días llenos</span><br><span class="word-coral">de alegría.</span><br><span class="word-purple">¡A crecer!</span>')}</h1><p>${T('Messy art. New friends. One more story, please! A happy place for your child to play, learn, and feel right at home.', 'Arte con las manos. Nuevos amigos. ¡Otro cuento, por favor! Un lugar feliz para jugar, aprender y sentirse como en casa.')}</p><div class="sunny-buttons">${btn(T('Come say hello!', '¡Ven a conocernos!'))}<a class="sunny-secondary" href="#/programs">${T('Find their age group', 'Encuentra su grupo')} ${icon('arrow')}</a></div><p class="bilingual-note">${icon('globe')} ${T('English & Español. Everyone’s welcome.', 'Español & English. Todos son bienvenidos.')}</p></div><div class="sunny-photo-world">${sun}<div class="main-snapshot"><img src="assets/classroom.jpg" alt="${T('A teacher reading a story with children — illustrative stock photo', 'Una maestra comparte un cuento con niños — foto de archivo ilustrativa')}" width="1600" height="1067" fetchpriority="high"><span class="hand-note">${T('“One more story!”', '«¡Otro cuento!»')}</span></div><div class="small-snapshot"><img src="assets/learning.jpg" alt="${T('Children playing together with colorful wooden blocks — stock photo', 'Niñas juegan con bloques de colores — foto de archivo')}" width="900" height="600"><span class="hand-note">${T('Better together ♡', 'Juntos es mejor ♡')}</span></div><span class="hero-spark spark-one" aria-hidden="true">✦</span><span class="hero-spark spark-two" aria-hidden="true">✦</span>${rainbow}</div></div></section>
+  <section class="hello-strip container" aria-label="${T('Our approach', 'Nuestro enfoque')}"><span><b class="strip-flower">✿</b>${T('A whole lot of play', 'Mucho, mucho juego')}</span><span><b class="strip-heart">♡</b>${T('A whole lot of love', 'Mucho, mucho amor')}</span><span><b class="strip-sun">☀</b>${T('A little more sunshine', 'Un poquito más de sol')}</span></section>
+  <section class="sunny-programs section container" id="programs"><div class="sunny-section-title"><span class="hand-note">${T('From tiny toes to big adventures', 'De pequeños pasos a grandes aventuras')}</span><h2>${T('There’s room for <span>every little one.</span>', 'Hay un lugar para <span>cada pequeño.</span>')}</h2><p>${T('A little care, a little play, and something new to learn every day.', 'Un poco de cuidado, mucho juego y algo nuevo por aprender cada día.')}</p></div><div class="sunny-program-grid">${programs()
     .map(
       (p, i) =>
-        `<article class="program-card ${p.color}"><span class="program-symbol" aria-hidden="true">${p.symbol}</span><span class="program-number">0${i + 1}</span><p class="age">${p.age}</p><h3>${p.title}</h3><p>${p.desc}</p><a href="#/book" data-program="${p.id}">${T('Let’s explore', 'Vamos a explorar')}${icon('arrow')}</a></article>`,
+        `<article class="sunny-program program-${i}"><div class="toy-circle">${toyIcons[i]}</div><h3>${names[i]}</h3><span class="sunny-age">${p.age.split(' · ')[1]}</span><p>${blurbs[i]}</p><a href="#/book" data-program="${p.id}" aria-label="${T('Visit our ', 'Visita nuestro grupo de ')}${names[i]}">${T('Come explore', 'Ven a explorar')} ${icon('arrow')}</a></article>`,
     )
     .join(
       '',
-    )}</div><p class="section-footnote">${T('Illustrative program offerings for the new center. Ages and availability will be confirmed before enrollment.', 'Oferta ilustrativa para el nuevo centro. Edades y disponibilidad por confirmar antes de la inscripción.')}</p></section>
-<section class="story-section" id="about"><div class="container story-grid"><div class="story-images"><img class="story-main" src="assets/learning.jpg" alt="${T('Two young children building with colorful wooden blocks — stock photo', 'Dos niñas construyen con bloques de colores — foto de archivo')}" loading="lazy" width="900" height="600"><img class="story-small" src="assets/child.jpg" alt="${T('A smiling child enjoying a colorful art activity — stock photo', 'Una niña sonríe durante una actividad de arte — foto de archivo')}" loading="lazy" width="1000" height="1506"><span class="story-seal">${icon('heart')}<span>${T('little people,<br>big love', 'pequeños seres,<br>gran amor')}</span></span></div><div class="story-copy"><div class="eyebrow">${T('MORE THAN DAYCARE. A LITTLE COMMUNITY.', 'MÁS QUE UNA GUARDERÍA. UNA COMUNIDAD.')}</div><h2>${T('They bring the wonder.<br>We bring the <em>care.</em>', 'Ellos traen el asombro.<br>Nosotros, el <em>cariño.</em>')}</h2><p>${T('Choosing care is a big decision. We believe it should feel like finding your people: a place that celebrates your child, listens to your family, and makes the everyday feel a little more special.', 'Elegir quién cuidará a tu hijo es una gran decisión. Queremos que se sienta como encontrar a tu gente: un lugar que celebra a tu hijo, escucha a tu familia y hace especial lo cotidiano.')}</p><p>${T('Inspired by the family-centered approach of Honey Bear Day Care, Little Panda brings together joyful learning, meaningful connections, and a love for every little milestone.', 'Inspirado en el enfoque familiar de Honey Bear Day Care, Little Panda reúne aprendizaje alegre, conexiones significativas y amor por cada pequeño logro.')}</p><div class="story-points"><span>${icon('check')}${T('A partnership with parents', 'Una alianza con las familias')}</span><span>${icon('check')}${T('Learning through discovery', 'Aprender descubriendo')}</span><span>${icon('check')}${T('Connection in two languages', 'Conexión en dos idiomas')}</span></div>${btn(T('Let’s get to know each other', 'Conozcámonos'), '#/book', 'outline')}</div></div></section>
-<section class="section container" id="day"><div class="center-heading"><div class="eyebrow">${T('ORDINARY DAYS. EXTRAORDINARY DISCOVERIES.', 'DÍAS COTIDIANOS. DESCUBRIMIENTOS EXTRAORDINARIOS.')}</div><h2>${T('A little peek into our <em>day.</em>', 'Una miradita a nuestro <em>día.</em>')}</h2><p>${T('A comforting rhythm, with plenty of room for a little magic.', 'Una rutina que da confianza, con mucho espacio para la magia.')}</p></div><div class="day-grid">${[
+    )}</div><p class="section-footnote">${T('Demo program guide. Final age groups and availability to be confirmed.', 'Guía de programas demo. Edades y disponibilidad final por confirmar.')}</p></section>
+  <section class="sunny-story" id="about"><div class="container sunny-story-grid"><div class="sunny-story-photo"><img src="assets/child.jpg" alt="${T('A happy child covered in colorful paint — illustrative stock photo', 'Una niña feliz con pintura de colores — foto de archivo ilustrativa')}" width="1000" height="1506" loading="lazy"><span class="tape" aria-hidden="true"></span><div class="paint-stamp">${T('A little messy.<br>A lot of fun!', '¡Un poco de lío.<br>Mucha diversión!')}</div><span class="story-flower" aria-hidden="true">✿</span></div><div class="sunny-story-copy"><span class="hand-note">${T('A big welcome to our little world', 'Bienvenidos a nuestro pequeño mundo')}</span><h2>${T('Childhood should<br>be full of <span>happy.</span>', 'La infancia merece<br>mucha <span>alegría.</span>')}</h2><p>${T('The kind with paint on their fingers, a favorite book on their lap, and a friend waiting to play.', 'De esa que deja pintura en los dedos, un cuento favorito en el regazo y un amigo esperando para jugar.')}</p><p>${T('That’s the feeling we’re creating at Little Panda. Inspired by the family-focused care at Honey Bear, we’re making room for curious kids, caring grown-ups, and families who feel they belong.', 'Ese es el ambiente que queremos en Little Panda. Inspirados en el cuidado familiar de Honey Bear, creamos un lugar para niños curiosos, adultos cariñosos y familias que se sienten parte de él.')}</p><ul class="sunny-checks"><li>${T('Time to play, try, and try again', 'Tiempo para jugar, intentar y volver a intentar')}</li><li>${T('A friendly face and a listening ear', 'Una cara amable y alguien que te escucha')}</li><li>${T('A connection with your whole family', 'Una conexión con toda tu familia')}</li></ul>${btn(T('Let’s meet each other', 'Vamos a conocernos'))}</div></div></section>
+  <section class="sunny-day" id="day"><div class="container"><div class="sunny-section-title"><span class="hand-note">${T('So, what did you do today?', 'Y hoy, ¿qué hiciste?')}</span><h2>${T('A day full of <span>“guess what!”</span>', 'Un día lleno de <span>«¡adivina qué!»</span>')}</h2></div><div class="sunny-day-grid">${[
     [
       'sun',
-      T('Hello, sunshine', 'Hola, sol'),
-      T('Warm welcomes & free play', 'Bienvenidas y juego libre'),
+      T('Hello, friends!', '¡Hola, amigos!'),
       T(
-        'A gentle start, familiar faces, and time to settle in.',
-        'Un inicio tranquilo, caras conocidas y tiempo para adaptarse.',
+        'A warm welcome, a wave goodbye, and time to settle in and play.',
+        'Una cálida bienvenida, una despedida y tiempo para adaptarse y jugar.',
       ),
     ],
     [
       'book',
-      T('Wonder & discover', 'Imaginar y descubrir'),
-      T('Stories, art & exploration', 'Cuentos, arte y exploración'),
+      T('Let’s make something', 'Vamos a crear'),
       T(
-        'Little questions lead to big discoveries through play.',
-        'Las pequeñas preguntas llevan a grandes descubrimientos.',
+        'Stories, songs, building, painting. Where will our imaginations go?',
+        'Cuentos, canciones, bloques, pintura. ¿Adónde nos llevará la imaginación?',
       ),
     ],
     [
       'leaf',
-      T('Nourish & recharge', 'Comer y descansar'),
-      T('Mealtime & quiet moments', 'Comidas y momentos tranquilos'),
+      T('Refuel & rest', 'Comer y descansar'),
       T(
-        'A chance to refuel, rest, and get ready for more.',
-        'Tiempo para nutrirse, descansar y recuperar energía.',
+        'A bite to eat and a quiet moment. Even explorers need a little rest.',
+        'Algo rico y un momento de calma. Hasta los exploradores necesitan descansar.',
       ),
     ],
     [
       'heart',
-      T('Play, then hooray!', '¡A jugar y celebrar!'),
-      T('Friendships & happy goodbyes', 'Amistades y despedidas felices'),
+      T('See you tomorrow!', '¡Hasta mañana!'),
       T(
-        'More adventures and little stories to take home.',
-        'Más aventuras y pequeñas historias para llevar a casa.',
+        'More play, happy goodbyes, and a little story to share on the way home.',
+        'Más juegos, despedidas felices y una historia para contar de camino a casa.',
       ),
     ],
   ]
     .map(
       (d, i) =>
-        `<article class="day-item"><span class="day-icon day-${i}">${icon(d[0])}</span><span class="day-step">0${i + 1}</span><h3>${d[1]}</h3><strong>${d[2]}</strong><p>${d[3]}</p></article>`,
+        `<article><div class="day-doodle doodle-${i}">${icon(d[0])}</div><h3>${d[1]}</h3><p>${d[2]}</p></article>`,
     )
     .join(
       '',
-    )}</div><p class="section-footnote">${T('Sample daily rhythm. Activities and routines vary by age.', 'Ejemplo de rutina diaria. Las actividades varían según la edad.')}</p></section>
-<section class="care-band"><div class="container care-grid"><div><div class="eyebrow">${T('FOR YOUR LITTLE ONE. FOR YOUR PEACE OF MIND.', 'PARA TU PEQUEÑO. PARA TU TRANQUILIDAD.')}</div><h2>${T('Care you can<br><em>feel good about.</em>', 'Cuidado que<br><em>te da confianza.</em>')}</h2><p>${T('Your questions matter. During your tour, let’s talk about the details that help your family feel at home.', 'Tus preguntas importan. Durante tu visita, hablemos de los detalles que hacen sentir a tu familia como en casa.')}</p></div><div class="care-topics">${[
+    )}</div><p class="section-footnote">${T('A sample day. Routines and activities change with each age group.', 'Un día de ejemplo. Las rutinas y actividades cambian según el grupo de edad.')}</p></div></section>
+  <section class="sunny-parent section container"><div class="sunny-section-title"><span class="hand-note">${T('And for you, grown-ups…', 'Y para ustedes, familias…')}</span><h2>${T('Let’s talk about <span>the important stuff.</span>', 'Hablemos de <span>lo que importa.</span>')}</h2></div><div class="sunny-parent-grid">${[
     [
       'shield',
-      T('Safety, thoughtfully considered', 'Seguridad en cada detalle'),
+      T('Safe & sound', 'Seguros y tranquilos'),
       T(
-        'Ask about arrival, authorized pickup, and classroom routines.',
-        'Conoce las rutinas de llegada, recogida autorizada y del salón.',
+        'From drop-off to pickup, ask us about the everyday routines that help keep children safe.',
+        'Desde la llegada hasta la recogida, conoce las rutinas que ayudan a cuidar a los niños.',
       ),
     ],
     [
       'people',
-      T('A real connection with families', 'Una conexión real con las familias'),
+      T('You’re part of this, too', 'Tú también eres parte'),
       T(
-        'Talk about daily updates, milestones, and how we stay in touch.',
-        'Conversemos sobre noticias diarias, logros y comunicación.',
+        'Tell us about your child. Ask about updates, milestones, and how we’ll stay in touch.',
+        'Cuéntanos sobre tu hijo. Pregunta por las noticias, los logros y cómo seguiremos en contacto.',
       ),
     ],
     [
       'globe',
-      T('Two languages. One warm welcome.', 'Dos idiomas. Una cálida bienvenida.'),
+      T('Hola! Hello!', '¡Hola! Hello!'),
       T(
-        'Explore your options and plan your visit in English or Spanish.',
-        'Explora las opciones y planea tu visita en inglés o español.',
+        'Two languages to help you feel at home. Browse, ask questions, and book in English or Spanish.',
+        'Dos idiomas para sentirte como en casa. Explora, pregunta y reserva en español o inglés.',
       ),
     ],
   ]
-    .map((x) => `<article>${icon(x[0])}<div><h3>${x[1]}</h3><p>${x[2]}</p></div></article>`)
-    .join('')}</div></div></section>
-<section class="section container faq-section" id="faq"><div><div class="eyebrow">${T('BIG QUESTIONS WELCOME', 'LAS GRANDES PREGUNTAS SON BIENVENIDAS')}</div><h2>${T('A little clarity<br>for <em>parents.</em>', 'Un poco de claridad<br>para las <em>familias.</em>')}</h2><p>${T('Because finding the right fit starts with a good conversation.', 'Porque encontrar el lugar ideal empieza con una buena conversación.')}</p><a class="text-link" href="#/book">${T('Ask us on a tour', 'Pregúntanos en una visita')} ${icon('arrow')}</a></div><div class="faq-list">${[
-    [
-      T('How do we get started?', '¿Cómo empezamos?'),
-      T(
-        'Book a tour at a time that works for your family. We’ll get to know your needs, explore the programs, and talk through next steps. A tour does not commit you to enrollment.',
-        'Agenda una visita cuando te convenga. Conoceremos tus necesidades, exploraremos los programas y hablaremos de los siguientes pasos. Una visita no te compromete a inscribirte.',
-      ),
-    ],
-    [
-      T('Can I bring my child to the tour?', '¿Puedo llevar a mi hijo a la visita?'),
-      T(
-        'Absolutely. We’d love to meet your little one. Add any questions or accessibility needs when booking so we can plan a welcoming visit.',
-        '¡Claro! Nos encantará conocer a tu pequeño. Incluye tus preguntas o necesidades de accesibilidad al reservar para preparar una visita acogedora.',
-      ),
-    ],
-    [
-      T('Do you offer care in Spanish?', '¿Ofrecen cuidado en español?'),
-      T(
-        'Bilingual connection is part of the Little Panda vision. You can browse this site and book in either language. Ask about classroom language options during your visit.',
-        'La conexión bilingüe es parte de la visión de Little Panda. Puedes explorar este sitio y reservar en ambos idiomas. Pregunta por los idiomas del salón durante tu visita.',
-      ),
-    ],
-    [
-      T(
-        'What about tuition and financial assistance?',
-        '¿Qué hay de la matrícula y la ayuda financiera?',
-      ),
-      T(
-        'Tuition depends on your child’s age and care schedule. During your visit, ask for current rates, enrollment fees, and any assistance options available at the new center.',
-        'Las tarifas dependen de la edad y el horario de cuidado. Durante tu visita, pregunta por las tarifas actuales, cuotas de inscripción y opciones de ayuda disponibles en el nuevo centro.',
-      ),
-    ],
-    [
-      T(
-        'Where is the new center, and what are the hours?',
-        '¿Dónde está el nuevo centro y cuál es el horario?',
-      ),
-      T(
-        'The new Little Panda location and operating hours will be added before launch. The phone listed here is the existing Honey Bear family contact. Tour times shown are demonstration availability.',
-        'La dirección y el horario del nuevo centro se agregarán antes del lanzamiento. El teléfono indicado es el contacto actual de Honey Bear. Los horarios de visita son de demostración.',
-      ),
-    ],
-  ]
-    .map(
-      (x, i) =>
-        `<details ${i === 0 ? 'open' : ''}><summary>${x[0]}<span>+</span></summary><p>${x[1]}</p></details>`,
-    )
+    .map((d) => `<article>${icon(d[0])}<h3>${d[1]}</h3><p>${d[2]}</p></article>`)
     .join('')}</div></section>
-<section class="visit-banner container"><span class="banner-flower" aria-hidden="true">✿</span><div><div class="eyebrow">${T('YOUR NEXT CHAPTER STARTS WITH HELLO', 'TU PRÓXIMO CAPÍTULO EMPIEZA CON UN HOLA')}</div><h2>${T('Come for a visit.<br>Stay for the <em>feeling.</em>', 'Ven a conocernos.<br>Quédate por el <em>cariño.</em>')}</h2><p>${T('Meet the people. Ask all the questions. Picture your little one here.', 'Conoce al equipo. Haz todas tus preguntas. Imagina a tu pequeño aquí.')}</p>${btn(T('Find a time to visit', 'Encuentra un horario'))}<small>${T(`A relaxed, ${state.settings.duration}-minute introduction. Little ones welcome.`, `Una presentación tranquila de ${state.settings.duration} minutos. Los pequeños son bienvenidos.`)}</small></div><img src="assets/logo.png" alt="Little Panda Daycare" loading="lazy" width="2149" height="733"></section></main>${footer()}`;
+  <section class="sunny-faq" id="faq"><div class="container sunny-faq-grid"><div><span class="hand-note">${T('It’s okay to have a million questions', 'Se vale tener mil preguntas')}</span><h2>${T('Good questions.<br><span>Honest answers.</span>', 'Buenas preguntas.<br><span>Respuestas claras.</span>')}</h2><p>${T('Choosing a daycare is a big deal. Let’s start here, and talk about the rest when you visit.', 'Elegir una guardería es importante. Empecemos aquí y conversemos del resto durante tu visita.')}</p>${rainbow}</div><div class="faq-list">${faqs.map((q, i) => `<details ${i === 0 ? 'open' : ''}><summary>${q[0]}<span>+</span></summary><p>${q[1]}</p></details>`).join('')}</div></div></section>
+  <section class="sunny-visit"><div class="container sunny-visit-inner">${sun}<span class="hand-note">${T('The best way to get to know us?', '¿La mejor forma de conocernos?')}</span><h2>${T('Come on <span>over!</span>', '¡Ven a <span>visitarnos!</span>')}</h2><p>${T('Bring your little one. Bring your questions.<br>We’ll bring the warm welcome.', 'Trae a tu pequeño. Trae tus preguntas.<br>Nosotros ponemos la cálida bienvenida.')}</p>${btn(T('Let’s book a visit', 'Vamos a agendar una visita'))}<small>${state.settings.duration} ${T('minutes to look around. No pressure, just hello.', 'minutos para conocernos. Sin presión, solo un hola.')}</small></div></section>
+  </div></main>${footer()}`;
 }
 let booking = {
   date: null,
@@ -390,7 +411,7 @@ function route() {
     : route.startsWith('#/book')
       ? T('Book a tour | Little Panda', 'Agenda una visita | Little Panda')
       : 'Little Panda Daycare | ' +
-        T('Little moments. Big beginnings.', 'Pequeños momentos. Grandes comienzos.');
+        T('Happy little days. Bright big futures.', 'Días llenos de alegría. ¡A crecer!');
   $('#app').innerHTML = route.startsWith('#/admin')
     ? adminPage()
     : route.startsWith('#/book')
