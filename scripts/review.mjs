@@ -12,7 +12,7 @@ await page.evaluate(() => document.fonts.ready);
 await page.screenshot({ path: output('panda-desktop.png'), fullPage: true });
 await page.getByRole('button', { name: 'ES', exact: true }).click();
 assert.equal(await page.locator('html').getAttribute('lang'), 'es');
-await page.getByRole('heading', { name: /Días llenos/ }).waitFor();
+await page.getByRole('heading', { name: /Jugar. Reír/ }).waitFor();
 await page.getByRole('button', { name: 'EN', exact: true }).click();
 await page.goto('http://localhost:5173/#/book');
 await page.locator('[data-time]').first().click();

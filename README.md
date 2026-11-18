@@ -1,6 +1,6 @@
 # Little Panda Daycare
 
-A sunny, colorful bilingual English/Spanish daycare website, family-tour booking flow, and staff dashboard. The public design uses a yellow playground palette, snapshot-style photographs, original toy illustrations, handwritten notes, and scalloped section edges. Built with semantic HTML, CSS, and native JavaScript modules. No application framework, runtime dependencies, database, or account setup required.
+A sunny, colorful bilingual English/Spanish daycare website, family-tour booking flow, and staff dashboard. The public design uses a soft sky-blue, peach, and lilac palette, cut-paper photo masks, original toy illustrations, handwritten notes, and scalloped section edges. Copy is deliberately brief, with details kept in collapsed FAQs. Built with semantic HTML, CSS, and native JavaScript modules. No application framework, runtime dependencies, database, or account setup required.
 
 ## Run locally
 
