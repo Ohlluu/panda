@@ -15,13 +15,14 @@ Open http://localhost:5173.
 - Website: `/#/`
 - Book a family tour: `/#/book`
 - Staff dashboard: `/#/admin`
+- Published newsletters: `/#/newsletters`
 
 Use the EN / ES buttons to switch the entire public site, booking flow, or dashboard. Language preference persists in the browser.
 
 ## Demo walkthrough
 
 1. Open **Staff demo** from the website footer.
-2. Choose **Availability**. Set weekly days/hours, tour duration, and the buffer between tours, then save.
+2. Choose **Availability**. Set weekly days and one or more time windows per day (for example, 10 am–12 pm and 1 pm–3 pm), tour duration, and the buffer between tours, then save. Overlapping and too-short windows are rejected.
 3. Block a date to demonstrate closures or holidays.
 4. Open **Preview booking**. Families see open dates for the next 90 days, in America/Chicago time.
 5. Choose a time and complete the form with sample contact details.
@@ -29,7 +30,17 @@ Use the EN / ES buttons to switch the entire public site, booking flow, or dashb
 7. Return to the dashboard to see the new booking. Use search, status filters, and **View details**.
 8. Use **Reset demo data** in the dashboard footer to start fresh.
 
-Schedules, bookings, and the three clearly labeled sample families are stored in localStorage under `little-panda-demo-v1`. Data survives page refresh in the same browser and origin. Tabs on the same origin receive updates. Separate devices and browsers do not share data. Blocked dates preserve existing bookings; contact/reschedule those families separately in the demo.
+Schedules, newsletters, bookings, and the three clearly labeled sample families are stored in localStorage under `little-panda-demo-v1`. Data survives page refresh in the same browser and origin. Tabs on the same origin receive updates. Separate devices and browsers do not share data. Blocked dates preserve existing bookings; contact/reschedule those families separately in the demo.
+
+## Newsletter publishing demo
+
+Open **Newsletters** in the staff dashboard, then **New newsletter**. Write the title and content in the English and Español tabs; optional introductions and an illustrative cover photo are available. Preview the selected language, save a draft, and publish when both languages are ready.
+
+Published editions appear under **Newsletters** on the public website. Saving a draft of an already-published edition preserves the current public version until **Publish changes** is clicked. **Unpublish** removes the public edition while retaining the draft; **Delete** removes both after confirmation. Text is rendered safely as plain paragraphs; HTML is not executed.
+
+This remains a browser-local showcase. Publishing updates this browser's demo website, not a shared CMS or a mailing list; other visitors and devices cannot see these local editions. No email is sent. Production newsletter publishing needs authenticated staff access and shared storage, with an email service if email distribution is wanted.
+
+Older single-window schedules and existing appointments are kept compatible; no reset is required when upgrading.
 
 ## Build and test
 
@@ -47,9 +58,10 @@ npm install
 npx playwright install chromium
 # In a separate terminal: npm run dev
 npm run test:browser
+npm run test:admin
 ```
 
-The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes.
+The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, split windows, lunch breaks, overlap validation, legacy schedules, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes. The admin browser suite verifies newsletter drafts, bilingual validation, previews, publication, revision isolation, safe content rendering, persistence, unpublishing/deletion, and split availability at phone, tablet, and desktop widths.
 
 ## Content and assets
 

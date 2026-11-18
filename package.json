@@ -8,7 +8,8 @@
     "build": "node scripts/build.mjs",
     "test": "node --test tests/scheduling.test.mjs",
     "test:browser": "node scripts/review.mjs",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:admin": "node scripts/admin-review.mjs"
   },
   "devDependencies": {
     "playwright": "^1.63.0",

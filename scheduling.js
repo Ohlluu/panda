@@ -38,11 +38,10 @@ export function slotsFor(date, settings, bookings, ignoreId = null, now = new Da
   const day = settings.weekly[parseDate(date).getDay()];
   if (!day?.enabled) return [];
   const duration = Number(settings.duration),
-    buffer = Number(settings.buffer),
-    start = minutes(day.start),
-    end = minutes(day.end);
-  if (!duration || duration < 15 || buffer < 0 || !Number.isFinite(start) || !Number.isFinite(end))
+    buffer = Number(settings.buffer);
+  if (!Number.isFinite(duration) || duration < 15 || !Number.isFinite(buffer) || buffer < 0)
     return [];
+  const windows = dayWindows(day);
   const parts = new Intl.DateTimeFormat('en-US', {
     timeZone: zone,
     hourCycle: 'h23',
@@ -52,20 +51,25 @@ export function slotsFor(date, settings, bookings, ignoreId = null, now = new Da
   const current =
     Number(parts.find((p) => p.type === 'hour').value) * 60 +
     Number(parts.find((p) => p.type === 'minute').value);
-  const out = [];
-  for (let t = start; t + duration <= end; t += duration + buffer) {
-    if (date === today && t <= current) continue;
-    const overlaps = bookings.some(
-      (b) =>
-        b.id !== ignoreId &&
-        b.status !== 'cancelled' &&
-        b.date === date &&
-        t < minutes(b.time) + Number(b.duration) + buffer &&
-        t + duration + buffer > minutes(b.time),
-    );
-    if (!overlaps) out.push(wallTime(t));
+  const out = new Set();
+  for (const window of windows) {
+    const start = minutes(window.start),
+      end = minutes(window.end);
+    if (!validTime(window.start) || !validTime(window.end) || start >= end) continue;
+    for (let t = start; t + duration <= end; t += duration + buffer) {
+      if (date === today && t <= current) continue;
+      const overlaps = bookings.some(
+        (b) =>
+          b.id !== ignoreId &&
+          b.status !== 'cancelled' &&
+          b.date === date &&
+          t < minutes(b.time) + Number(b.duration) + buffer &&
+          t + duration + buffer > minutes(b.time),
+      );
+      if (!overlaps) out.add(wallTime(t));
+    }
   }
-  return out;
+  return [...out].sort();
 }
 export function firstOpening(settings, bookings, ignoreId = null) {
   const today = todayKey();
@@ -78,8 +82,7 @@ export function firstOpening(settings, bookings, ignoreId = null) {
 export function initialState() {
   const weekly = Array.from({ length: 7 }, (_, i) => ({
     enabled: i > 0 && i < 6,
-    start: '09:00',
-    end: '16:00',
+    windows: [{ start: '09:00', end: '16:00' }],
   }));
   const settings = { weekly, duration: 30, buffer: 15, blocked: [] };
   const bookings = [];
@@ -105,5 +108,25 @@ export function initialState() {
       sample: true,
     });
   }
-  return { settings, bookings };
+  return { settings, bookings, newsletters: [] };
+}
+
+// Older demos saved a single start/end pair. Keep them readable without resetting appointments.
+export function dayWindows(day) {
+  return Array.isArray(day?.windows)
+    ? day.windows
+    : [{ start: day?.start || '09:00', end: day?.end || '16:00' }];
+}
+export function validTime(time) {
+  return typeof time === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(time);
+}
+export function validateWindows(windows, duration) {
+  if (!windows.length) return 'empty';
+  for (const w of windows) {
+    if (!validTime(w.start) || !validTime(w.end) || minutes(w.end) - minutes(w.start) < duration)
+      return 'short';
+  }
+  const sorted = [...windows].sort((a, b) => a.start.localeCompare(b.start));
+  for (let i = 1; i < sorted.length; i++) if (sorted[i].start < sorted[i - 1].end) return 'overlap';
+  return null;
 }

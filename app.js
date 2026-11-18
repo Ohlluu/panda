@@ -7,7 +7,10 @@ import {
   slotsFor,
   firstOpening,
   initialState,
-} from './scheduling.js';
+  dayWindows,
+  validateWindows,
+} from './scheduling.js?v=20261118-admin';
+import { createNewsletters } from './newsletters.js?v=20261118-admin';
 const $ = (s) => document.querySelector(s),
   esc = (s) =>
     String(s ?? '').replace(
@@ -20,7 +23,9 @@ let memory = initialState(),
 function read() {
   try {
     const value = JSON.parse(localStorage.getItem(KEY));
-    return value?.settings?.weekly?.length === 7 && Array.isArray(value.bookings) ? value : memory;
+    return value?.settings?.weekly?.length === 7 && Array.isArray(value.bookings)
+      ? { ...value, newsletters: Array.isArray(value.newsletters) ? value.newsletters : [] }
+      : memory;
   } catch {
     return memory;
   }
@@ -134,10 +139,10 @@ function btn(text, href = '#/book', cls = 'primary') {
   return `<a class="button ${cls}" href="${href}">${text}${icon('arrow')}</a>`;
 }
 function header() {
-  return `<div class="announcement">${icon('sun')} ${T('A little play. A lot of happy.', 'Un poco de juego. Mucha alegría.')} <span>${T('Care in English & Spanish', 'Cuidado en inglés y español')}</span></div><header class="site-header"><div class="container header-inner">${brand()}<nav id="nav" aria-label="${T('Main navigation', 'Navegación principal')}"><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/programs">${T('Our programs', 'Programas')}</a><a href="#/day">${T('A day here', 'Un día aquí')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas')}</a></nav><div class="header-actions"><div class="language" aria-label="${T('Language', 'Idioma')}"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button><span>/</span><button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div>${btn(T('Book a tour', 'Agenda una visita'))}<button class="menu-toggle icon-button" id="menu-toggle" aria-label="${T('Open menu', 'Abrir menú')}" aria-expanded="false">${icon('menu')}</button></div></div></header>`;
+  return `<div class="announcement">${icon('sun')} ${T('A little play. A lot of happy.', 'Un poco de juego. Mucha alegría.')} <span>${T('Care in English & Spanish', 'Cuidado en inglés y español')}</span></div><header class="site-header"><div class="container header-inner">${brand()}<nav id="nav" aria-label="${T('Main navigation', 'Navegación principal')}"><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/programs">${T('Our programs', 'Programas')}</a><a href="#/day">${T('A day here', 'Un día aquí')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas')}</a><a href="#/newsletters">${T('Newsletters', 'Boletines')}</a></nav><div class="header-actions"><div class="language" aria-label="${T('Language', 'Idioma')}"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button><span>/</span><button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div>${btn(T('Book a tour', 'Agenda una visita'))}<button class="menu-toggle icon-button" id="menu-toggle" aria-label="${T('Open menu', 'Abrir menú')}" aria-expanded="false">${icon('menu')}</button></div></div></header>`;
 }
 function footer() {
-  return `<footer><div class="container footer-grid"><div>${brand()}<p>${T('See you soon, little sunshine!', '¡Hasta pronto, rayito de sol!')}</p></div><div><strong>${T('Come explore', 'Ven a explorar')}</strong><a href="#/programs">${T('Our programs', 'Nuestros programas')}</a><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas frecuentes')}</a></div><div><strong>${T('Let’s connect', 'Conectemos')}</strong><a href="#/book">${T('Schedule your visit', 'Agenda tu visita')}</a><a href="tel:+18474558687">847-455-8687</a><small>${T('Honey Bear family contact · New location details coming soon', 'Contacto de la familia Honey Bear · Nueva dirección próximamente')}</small></div><div class="footer-note">${icon('globe')}<strong>${T('Every family belongs.', 'Cada familia tiene su lugar.')}</strong><p>${T('We speak English. Hablamos español.', 'Hablamos español. We speak English.')}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Little Panda Daycare</span><span>${T('Demo · Stock photography · Program details subject to confirmation', 'Demo · Fotos de archivo · Detalles de programas por confirmar')}</span><a href="#/admin">${T('Staff demo', 'Demo del personal')} ↗</a></div></footer>`;
+  return `<footer><div class="container footer-grid"><div>${brand()}<p>${T('See you soon, little sunshine!', '¡Hasta pronto, rayito de sol!')}</p></div><div><strong>${T('Come explore', 'Ven a explorar')}</strong><a href="#/programs">${T('Our programs', 'Nuestros programas')}</a><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas frecuentes')}</a><a href="#/newsletters">${T('Newsletters', 'Boletines')}</a></div><div><strong>${T('Let’s connect', 'Conectemos')}</strong><a href="#/book">${T('Schedule your visit', 'Agenda tu visita')}</a><a href="tel:+18474558687">847-455-8687</a><small>${T('Honey Bear family contact · New location details coming soon', 'Contacto de la familia Honey Bear · Nueva dirección próximamente')}</small></div><div class="footer-note">${icon('globe')}<strong>${T('Every family belongs.', 'Cada familia tiene su lugar.')}</strong><p>${T('We speak English. Hablamos español.', 'Hablamos español. We speak English.')}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Little Panda Daycare</span><span>${T('Demo · Stock photography · Program details subject to confirmation', 'Demo · Fotos de archivo · Detalles de programas por confirmar')}</span><a href="#/admin">${T('Staff demo', 'Demo del personal')} ↗</a></div></footer>`;
 }
 function home() {
   const rainbow = `<svg class="rainbow-doodle" viewBox="0 0 210 125" aria-hidden="true"><path d="M20 110a85 85 0 0 1 170 0" stroke="#f47b70"/><path d="M40 110a65 65 0 0 1 130 0" stroke="#ffc640"/><path d="M60 110a45 45 0 0 1 90 0" stroke="#65b7d0"/></svg>`;
@@ -310,8 +315,41 @@ function confirmation() {
 let adminTab = 'bookings',
   filter = 'upcoming',
   query = '';
+function adminNavigation() {
+  return [
+    ['bookings', 'calendar', T('Bookings', 'Reservas')],
+    ['availability', 'clock', T('Availability', 'Disponibilidad')],
+    ['newsletters', 'book', T('Newsletters', 'Boletines')],
+  ]
+    .map(
+      ([tab, symbol, label]) =>
+        `<button data-tab="${tab}" class="${adminTab === tab ? 'active' : ''}" aria-pressed="${adminTab === tab}">${icon(symbol)}${label}${tab === 'bookings' ? `<span>${state.bookings.filter((b) => b.status === 'confirmed' && b.date >= todayKey()).length}</span>` : ''}</button>`,
+    )
+    .join('');
+}
 function adminPage() {
-  return `<div class="admin-shell"><aside class="admin-sidebar">${brand()}<div class="sidebar-label">${T('YOUR LITTLE COMMAND CENTER', 'TU PEQUEÑO CENTRO DE CONTROL')}</div><nav aria-label="${T('Administration', 'Administración')}"><button data-tab="bookings" class="${adminTab === 'bookings' ? 'active' : ''}">${icon('calendar')}${T('Bookings', 'Reservas')}<span>${state.bookings.filter((b) => b.status === 'confirmed' && b.date >= todayKey()).length}</span></button><button data-tab="availability" class="${adminTab === 'availability' ? 'active' : ''}">${icon('clock')}${T('Availability', 'Disponibilidad')}</button></nav><div class="sidebar-bottom"><div class="sidebar-panda"><img src="assets/favicon.svg" alt="" width="56" height="56"><p>${T('More time for<br>little moments.', 'Más tiempo para<br>pequeños momentos.')}</p></div><a href="#/">${icon('arrow')}${T('View website', 'Ver sitio web')}</a><a href="#/book">${icon('calendar')}${T('Preview booking page', 'Ver página de reservas')}</a></div></aside><div class="admin-main"><header class="admin-header"><a class="admin-mobile-brand" href="#/">🐼 Little Panda</a><span>${icon('sun')}${T('A lovely day to welcome families.', 'Un hermoso día para recibir familias.')}</span><div class="language"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button>/<button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div><span class="admin-avatar">LP</span></header><main id="main"><div class="admin-demo">${icon('leaf')}<div><strong>${T('You’re exploring the staff demo', 'Estás explorando la demo del personal')}</strong><span>${T('No login required. Changes and sample bookings are stored in this browser only.', 'Sin inicio de sesión. Los cambios y las reservas se guardan solo en este navegador.')}</span></div></div><div class="admin-title"><div><div class="eyebrow">LITTLE PANDA DAYCARE</div><h1>${adminTab === 'bookings' ? T('Hello, little possibilities.', 'Hola, pequeñas posibilidades.') : T('Make room for a hello.', 'Haz espacio para un hola.')}</h1><p>${adminTab === 'bookings' ? T('A thoughtful welcome starts with a well-planned visit.', 'Una cálida bienvenida empieza con una visita bien planeada.') : T('Set your rhythm. Families can book the times you make available.', 'Define tu ritmo. Las familias pueden reservar los horarios que ofreces.')}</p></div>${btn(T('Preview booking', 'Ver reservas'), '#/book', 'outline')}</div><div class="admin-tabs-mobile"><button data-tab="bookings" class="${adminTab === 'bookings' ? 'active' : ''}">${T('Bookings', 'Reservas')}</button><button data-tab="availability" class="${adminTab === 'availability' ? 'active' : ''}">${T('Availability', 'Disponibilidad')}</button></div>${adminTab === 'bookings' ? bookingsAdmin() : availabilityAdmin()}</main><div class="admin-footer">${T('Little Panda staff demo · America/Chicago', 'Demo del personal Little Panda · America/Chicago')}<button class="text-button" id="reset-demo">${T('Reset demo data', 'Restablecer datos demo')}</button></div></div></div>`;
+  const title =
+    adminTab === 'bookings'
+      ? T('Hello, little possibilities.', 'Hola, pequeñas posibilidades.')
+      : adminTab === 'availability'
+        ? T('Make room for a hello.', 'Haz espacio para un hola.')
+        : T('A little news to share.', 'Noticias para compartir.');
+  const description =
+    adminTab === 'bookings'
+      ? T(
+          'A thoughtful welcome starts with a well-planned visit.',
+          'Una cálida bienvenida empieza con una visita bien planeada.',
+        )
+      : adminTab === 'availability'
+        ? T(
+            'Add separate time windows for mornings, afternoons, or any part of your day.',
+            'Agrega horarios separados para la mañana, la tarde o cualquier parte de tu día.',
+          )
+        : T(
+            'Create, preview, and publish your own bilingual newsletters.',
+            'Crea, revisa y publica tus propios boletines bilingües.',
+          );
+  return `<div class="admin-shell"><aside class="admin-sidebar">${brand()}<div class="sidebar-label">${T('YOUR LITTLE COMMAND CENTER', 'TU PEQUEÑO CENTRO DE CONTROL')}</div><nav aria-label="${T('Administration', 'Administración')}">${adminNavigation()}</nav><div class="sidebar-bottom"><div class="sidebar-panda"><img src="assets/favicon.svg" alt="" width="56" height="56"><p>${T('More time for<br>little moments.', 'Más tiempo para<br>pequeños momentos.')}</p></div><a href="#/">${icon('arrow')}${T('View website', 'Ver sitio web')}</a><a href="#/book">${icon('calendar')}${T('Preview booking page', 'Ver página de reservas')}</a></div></aside><div class="admin-main"><header class="admin-header"><a class="admin-mobile-brand" href="#/">🐼 Little Panda</a><span>${icon('sun')}${T('A lovely day to welcome families.', 'Un hermoso día para recibir familias.')}</span><div class="language"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button>/<button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div><span class="admin-avatar">LP</span></header><main id="main"><div class="admin-demo">${icon('leaf')}<div><strong>${T('You’re exploring the staff demo', 'Estás explorando la demo del personal')}</strong><span>${T('No login required. Bookings, schedules, and newsletters are stored in this browser only.', 'Sin inicio de sesión. Las reservas, horarios y boletines se guardan solo en este navegador.')}</span></div></div><div class="admin-title"><div><div class="eyebrow">LITTLE PANDA DAYCARE</div><h1>${title}</h1><p>${description}</p></div>${adminTab === 'newsletters' ? btn(T('View newsletters', 'Ver boletines'), '#/newsletters', 'outline') : btn(T('Preview booking', 'Ver reservas'), '#/book', 'outline')}</div><div class="admin-tabs-mobile">${adminNavigation()}</div>${adminTab === 'bookings' ? bookingsAdmin() : adminTab === 'availability' ? availabilityAdmin() : newsletters.adminPage()}</main><div class="admin-footer">${T('Little Panda staff demo · America/Chicago', 'Demo del personal Little Panda · America/Chicago')}<button class="text-button" id="reset-demo">${T('Reset demo data', 'Restablecer datos demo')}</button></div></div></div>`;
 }
 function bookingsAdmin() {
   const active = state.bookings.filter((b) => b.status === 'confirmed' && b.date >= todayKey()),
@@ -338,13 +376,49 @@ function bookingsAdmin() {
       '',
     )}</div><div class="booking-list">${list.length ? list.map((b) => `<article class="booking-row"><div class="date-tile"><span>${longDate(b.date, { month: 'short' })}</span><strong>${parseDate(b.date).getDate()}</strong></div><div class="booking-person"><h3>${esc(b.name)}${b.sample ? `<span class="sample-badge">${T('SAMPLE', 'EJEMPLO')}</span>` : ''}</h3><span>${esc(b.email)}</span><small>${programName(b.program)}</small></div><div class="booking-when"><strong>${timeLabel(b.time)}</strong><span>${b.duration} min · ${b.language === 'es' ? 'Español' : 'English'}</span><span class="status ${b.status}">${b.status === 'confirmed' ? T('Confirmed', 'Confirmada') : T('Cancelled', 'Cancelada')}</span></div><button class="small-button" data-manage="${esc(b.id)}">${T('View details', 'Ver detalles')}${icon('chevron')}</button></article>`).join('') : `<div class="empty-state">${icon('calendar')}<h3>${T('A little room for new beginnings.', 'Espacio para nuevos comienzos.')}</h3><p>${T('No visits match this view. Try a different filter or make a demo booking.', 'No hay visitas en esta vista. Cambia el filtro o haz una reserva de prueba.')}</p>${btn(T('Make a demo booking', 'Crear reserva de prueba'), '#/book', 'outline')}</div>`}</div></section>`;
 }
+let availabilityDraft = null;
+function captureAvailability() {
+  const form = $('#availability-form');
+  if (!form) return;
+  availabilityDraft = {
+    ...state.settings,
+    duration: Number(form.elements.duration.value),
+    buffer: Number(form.elements.buffer.value),
+    weekly: [...form.querySelectorAll('.schedule-row')].map((row) => ({
+      enabled: row.querySelector('.day-switch input').checked,
+      windows: [...row.querySelectorAll('.schedule-hours')].map((range) => ({
+        start: range.querySelector('[data-range-start]').value,
+        end: range.querySelector('[data-range-end]').value,
+      })),
+    })),
+  };
+}
+function scheduleRows(dayNames) {
+  const settings = availabilityDraft || state.settings;
+  return settings.weekly
+    .map(
+      (day, i) =>
+        `<div class="schedule-row" data-schedule-day="${i}"><label class="day-switch"><input type="checkbox" name="day-${i}" ${day.enabled ? 'checked' : ''}><span>${dayNames[i]}</span></label><div class="day-time-windows">${dayWindows(
+          day,
+        )
+          .map(
+            (w, j) =>
+              `<div class="schedule-hours"><label class="sr-only" for="start-${i}-${j}">${dayNames[i]} ${T('window', 'horario')} ${j + 1} ${T('start time', 'hora inicial')}</label><input data-range-start type="time" id="start-${i}-${j}" name="start-${i}-${j}" value="${esc(w.start)}" ${day.enabled ? 'required' : 'disabled'}><span>—</span><label class="sr-only" for="end-${i}-${j}">${dayNames[i]} ${T('window', 'horario')} ${j + 1} ${T('end time', 'hora final')}</label><input data-range-end type="time" id="end-${i}-${j}" name="end-${i}-${j}" value="${esc(w.end)}" ${day.enabled ? 'required' : 'disabled'}><button class="icon-button remove-window" type="button" data-remove-window="${i}:${j}" ${day.enabled ? '' : 'disabled'} aria-label="${T('Remove', 'Eliminar')} ${dayNames[i]} ${T('window', 'horario')} ${j + 1}">${icon('close')}</button></div>`,
+          )
+          .join(
+            '',
+          )}<button class="text-button add-window" type="button" data-add-window="${i}" ${day.enabled ? '' : 'disabled'}>+ ${T('Add time window', 'Agregar horario')}</button></div></div>`,
+    )
+    .join('');
+}
 function availabilityAdmin() {
+  const settings = availabilityDraft || state.settings;
   const dayNames = Array.from({ length: 7 }, (_, i) =>
     new Intl.DateTimeFormat(lang === 'es' ? 'es' : 'en', { weekday: 'long' }).format(
       new Date(2026, 10, 1 + i),
     ),
   );
-  return `<div class="availability-layout"><section class="admin-card"><div class="card-heading"><div><h2>${T('Your weekly rhythm', 'Tu ritmo semanal')}</h2><p>${T('Choose the days and hours you welcome families.', 'Elige los días y horarios para recibir familias.')}</p></div><span class="tag">America/Chicago</span></div><form id="availability-form"><div class="weekly-schedule">${state.settings.weekly.map((d, i) => `<div class="schedule-row"><label class="day-switch"><input type="checkbox" name="day-${i}" ${d.enabled ? 'checked' : ''}><span>${dayNames[i]}</span></label><div class="schedule-hours"><label class="sr-only" for="start-${i}">${dayNames[i]} ${T('start time', 'hora inicial')}</label><input type="time" id="start-${i}" name="start-${i}" value="${d.start}" ${d.enabled ? 'required' : 'disabled'}><span>—</span><label class="sr-only" for="end-${i}">${dayNames[i]} ${T('end time', 'hora final')}</label><input type="time" id="end-${i}" name="end-${i}" value="${d.end}" ${d.enabled ? 'required' : 'disabled'}></div></div>`).join('')}</div><div class="settings-grid"><label>${T('Tour duration', 'Duración de la visita')}<select name="duration">${[15, 30, 45, 60].map((n) => `<option value="${n}" ${state.settings.duration === n ? 'selected' : ''}>${n} ${T('minutes', 'minutos')}</option>`).join('')}</select></label><label>${T('Breathing room between tours', 'Descanso entre visitas')}<select name="buffer">${[0, 15, 30].map((n) => `<option value="${n}" ${state.settings.buffer === n ? 'selected' : ''}>${n} ${T('minutes', 'minutos')}</option>`).join('')}</select></label></div><p class="form-message" id="schedule-error" role="alert"></p><div class="save-row"><span>${icon('shield')}${T('Existing bookings stay reserved.', 'Las reservas existentes se conservan.')}</span><button class="button primary" type="submit">${T('Save availability', 'Guardar disponibilidad')}${icon('check')}</button></div></form></section><aside><section class="admin-card blocked-card"><div class="card-heading"><div><h2>${T('A little time off', 'Un pequeño descanso')}</h2><p>${T('Block holidays, closures, or busy days.', 'Bloquea días festivos, cierres o días ocupados.')}</p></div></div><form id="block-form"><label>${T('Date to block', 'Fecha a bloquear')}<input type="date" name="date" required min="${todayKey()}" max="${addDays(todayKey(), 90)}"></label><button class="button outline full" type="submit">+ ${T('Block this date', 'Bloquear esta fecha')}</button></form><div class="blocked-list">${
+  return `<div class="availability-layout"><section class="admin-card"><div class="card-heading"><div><h2>${T('Your weekly rhythm', 'Tu ritmo semanal')}</h2><p>${T('For example: 10 am–12 pm, then 1 pm–3 pm. Save to update the family calendar.', 'Por ejemplo: 10–12 y 13–15. Guarda para actualizar el calendario familiar.')}</p></div><span class="tag">America/Chicago</span></div><form id="availability-form"><div class="weekly-schedule">${scheduleRows(dayNames)}</div><div class="settings-grid"><label>${T('Tour duration', 'Duración de la visita')}<select name="duration">${[15, 30, 45, 60].map((n) => `<option value="${n}" ${settings.duration === n ? 'selected' : ''}>${n} ${T('minutes', 'minutos')}</option>`).join('')}</select></label><label>${T('Breathing room between tours', 'Descanso entre visitas')}<select name="buffer">${[0, 15, 30].map((n) => `<option value="${n}" ${settings.buffer === n ? 'selected' : ''}>${n} ${T('minutes', 'minutos')}</option>`).join('')}</select></label></div><p class="form-message" id="schedule-error" role="alert"></p><div class="save-row"><span>${icon('shield')}${T('Existing bookings stay reserved.', 'Las reservas existentes se conservan.')}</span><button class="button primary" type="submit">${T('Save availability', 'Guardar disponibilidad')}${icon('check')}</button></div></form></section><aside><section class="admin-card blocked-card"><div class="card-heading"><div><h2>${T('A little time off', 'Un pequeño descanso')}</h2><p>${T('Block holidays, closures, or busy days.', 'Bloquea días festivos, cierres o días ocupados.')}</p></div></div><form id="block-form"><label>${T('Date to block', 'Fecha a bloquear')}<input type="date" name="date" required min="${todayKey()}" max="${addDays(todayKey(), 90)}"></label><button class="button outline full" type="submit">+ ${T('Block this date', 'Bloquear esta fecha')}</button></form><div class="blocked-list">${
     state.settings.blocked.length
       ? state.settings.blocked
           .slice()
@@ -370,12 +444,16 @@ function route() {
     ? T('Staff dashboard | Little Panda', 'Panel del personal | Little Panda')
     : route.startsWith('#/book')
       ? T('Book a tour | Little Panda', 'Agenda una visita | Little Panda')
-      : 'Little Panda Daycare | ' + T('Room to play. Room to grow.', 'Jugar. Reír. Crecer.');
+      : route.startsWith('#/newsletters')
+        ? T('Newsletters | Little Panda', 'Boletines | Little Panda')
+        : 'Little Panda Daycare | ' + T('Room to play. Room to grow.', 'Jugar. Reír. Crecer.');
   $('#app').innerHTML = route.startsWith('#/admin')
     ? adminPage()
     : route.startsWith('#/book')
       ? bookingPage()
-      : home();
+      : route.startsWith('#/newsletters')
+        ? newsletters.publicPage(route.split('/')[2])
+        : home();
   bind();
   const section = route.slice(2);
   if (['about', 'programs', 'day', 'faq'].includes(section))
@@ -428,6 +506,8 @@ function bind() {
     (el) =>
       (el.onclick = () => {
         rememberDetails();
+        captureAvailability();
+        newsletters.collect();
         lang = el.dataset.lang;
         try {
           localStorage.setItem('panda-language', lang);
@@ -462,6 +542,7 @@ function bind() {
   );
   bindBooking();
   bindAdmin();
+  newsletters.bind();
 }
 function bindBooking() {
   document.querySelectorAll('[data-date]').forEach(
@@ -543,6 +624,8 @@ function bindAdmin() {
   document.querySelectorAll('[data-tab]').forEach(
     (el) =>
       (el.onclick = () => {
+        captureAvailability();
+        newsletters.collect();
         adminTab = el.dataset.tab;
         route();
       }),
@@ -564,45 +647,73 @@ function bindAdmin() {
   document
     .querySelectorAll('[data-manage]')
     .forEach((el) => (el.onclick = () => showVisit(el.dataset.manage, true)));
+  $('#availability-form')?.addEventListener('change', captureAvailability);
   document.querySelectorAll('.day-switch input').forEach(
     (el) =>
       (el.onchange = () => {
-        el.closest('.schedule-row')
-          .querySelectorAll('input[type=time]')
-          .forEach((input) => {
-            input.disabled = !el.checked;
-            input.required = el.checked;
-          });
+        captureAvailability();
+        const i = Number(el.closest('[data-schedule-day]').dataset.scheduleDay),
+          day = availabilityDraft.weekly[i];
+        if (day.enabled && !day.windows.length) day.windows = [{ start: '09:00', end: '12:00' }];
+        route();
+      }),
+  );
+  document.querySelectorAll('[data-add-window]').forEach(
+    (el) =>
+      (el.onclick = () => {
+        captureAvailability();
+        const i = Number(el.dataset.addWindow);
+        availabilityDraft.weekly[i].windows.push({ start: '13:00', end: '15:00' });
+        route();
+        const ranges = document.querySelectorAll(`[data-schedule-day="${i}"] [data-range-start]`);
+        ranges[ranges.length - 1]?.focus();
+      }),
+  );
+  document.querySelectorAll('[data-remove-window]').forEach(
+    (el) =>
+      (el.onclick = () => {
+        captureAvailability();
+        const [i, j] = el.dataset.removeWindow.split(':').map(Number);
+        availabilityDraft.weekly[i].windows.splice(j, 1);
+        if (!availabilityDraft.weekly[i].windows.length)
+          availabilityDraft.weekly[i].enabled = false;
+        route();
       }),
   );
   $('#availability-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const data = new FormData(e.target),
-      duration = Number(data.get('duration'));
-    let weekly = [];
-    for (let i = 0; i < 7; i++) {
-      const previous = state.settings.weekly[i],
-        enabled = data.has('day-' + i),
-        start = data.get('start-' + i) || previous.start,
-        end = data.get('end-' + i) || previous.end;
-      if (
-        enabled &&
-        (start >= end ||
-          Number(end.slice(0, 2)) * 60 +
-            Number(end.slice(3)) -
-            Number(start.slice(0, 2)) * 60 -
-            Number(start.slice(3)) <
-            duration)
-      ) {
-        $('#schedule-error').textContent = T(
-          'Each enabled day needs an end time at least one tour after the start.',
-          'Cada día activo necesita una hora final al menos una visita después del inicio.',
-        );
+    captureAvailability();
+    for (const [i, day] of availabilityDraft.weekly.entries()) {
+      const issue = day.enabled ? validateWindows(day.windows, availabilityDraft.duration) : null;
+      if (issue) {
+        const dayName = new Intl.DateTimeFormat(lang === 'es' ? 'es' : 'en', {
+          weekday: 'long',
+        }).format(new Date(2026, 10, 1 + i));
+        $('#schedule-error').textContent =
+          dayName +
+          ': ' +
+          (issue === 'overlap'
+            ? T(
+                'Time windows cannot overlap. Adjust or remove the overlapping window.',
+                'Los horarios no pueden superponerse. Ajusta o elimina el horario.',
+              )
+            : T(
+                'Every open day needs a valid time window long enough for one tour.',
+                'Cada día abierto necesita un horario válido con tiempo para una visita.',
+              ));
         return;
       }
-      weekly.push({ enabled, start, end });
     }
-    state.settings = { ...state.settings, weekly, duration, buffer: Number(data.get('buffer')) };
+    state.settings = {
+      ...state.settings,
+      ...availabilityDraft,
+      blocked: state.settings.blocked,
+      weekly: availabilityDraft.weekly.map((day) => ({
+        ...day,
+        windows: [...day.windows].sort((a, b) => a.start.localeCompare(b.start)),
+      })),
+    };
+    availabilityDraft = null;
     save();
     booking.date = null;
     booking.time = null;
@@ -639,10 +750,12 @@ function bindAdmin() {
   );
   $('#reset-demo')?.addEventListener('click', () => {
     openDialog(
-      `<h2>${T('Start fresh?', '¿Empezar de nuevo?')}</h2><p>${T('This removes demo bookings and schedule changes in this browser and restores the sample data.', 'Esto elimina las reservas y cambios de este navegador y restaura los datos de ejemplo.')}</p><button class="button danger full" id="confirm-reset">${T('Reset demo data', 'Restablecer datos demo')}</button>`,
+      `<h2>${T('Start fresh?', '¿Empezar de nuevo?')}</h2><p>${T('This removes bookings, schedule changes, and newsletters in this browser and restores the sample data.', 'Esto elimina las reservas, cambios de horario y boletines de este navegador y restaura los datos de ejemplo.')}</p><button class="button danger full" id="confirm-reset">${T('Reset demo data', 'Restablecer datos demo')}</button>`,
     );
     $('#confirm-reset').onclick = () => {
       state = initialState();
+      availabilityDraft = null;
+      newsletters.reset();
       save();
       booking = {
         date: null,
@@ -663,6 +776,7 @@ let priorFocus;
 function openDialog(html) {
   priorFocus = document.activeElement;
   const d = $('#dialog');
+  d.classList.remove('newsletter-preview-dialog');
   d.setAttribute('aria-labelledby', 'dialog-title');
   d.innerHTML = `<button class="icon-button dialog-close" aria-label="${T('Close dialog', 'Cerrar diálogo')}">${icon('close')}</button>${html}`;
   d.querySelector('h2')?.setAttribute('id', 'dialog-title');
@@ -805,5 +919,21 @@ window.addEventListener('storage', (e) => {
     state = read();
     route();
   }
+});
+const newsletters = createNewsletters({
+  $,
+  T,
+  esc,
+  icon,
+  getState: () => state,
+  save,
+  render: route,
+  openDialog,
+  toast,
+  getLanguage: () => lang,
+  todayKey,
+  longDate,
+  header,
+  footer,
 });
 route();
