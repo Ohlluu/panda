@@ -1,3 +1,4 @@
+import { createPublicPages } from './public-pages.js?v=20261124-pages';
 import {
   zone,
   dateKey,
@@ -154,10 +155,19 @@ function btn(text, href = '#/book', cls = 'primary') {
   return `<a class="button ${cls}" href="${href}">${text}${icon('arrow')}</a>`;
 }
 function header() {
-  return `<div class="announcement">${icon('sun')} ${T('A little play. A lot of happy.', 'Un poco de juego. Mucha alegría.')} <span>${T('Care in English & Spanish', 'Cuidado en inglés y español')}</span></div><header class="site-header"><div class="container header-inner">${brand()}<nav id="nav" aria-label="${T('Main navigation', 'Navegación principal')}"><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/programs">${T('Our programs', 'Programas')}</a><a href="#/day">${T('A day here', 'Un día aquí')}</a><a href="#/tour">${T('Virtual tour', 'Recorrido virtual')}</a><a href="#/newsletters">${T('Newsletters', 'Boletines')}</a></nav><div class="header-actions"><div class="language" aria-label="${T('Language', 'Idioma')}"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button><span>/</span><button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div>${btn(T('Book a tour', 'Agenda una visita'))}<button class="menu-toggle icon-button" id="menu-toggle" aria-label="${T('Open menu', 'Abrir menú')}" aria-expanded="false">${icon('menu')}</button></div></div></header>`;
+  const current = (location.hash || '#/').slice(2).split('/')[0];
+  const items = [
+    ['', T('Home', 'Inicio')],
+    ['about', T('Our story', 'Nuestra historia')],
+    ['programs', T('Programs', 'Programas')],
+    ['day', T('A day here', 'Un día aquí')],
+    ['tour', T('Virtual tour', 'Recorrido virtual')],
+    ['newsletters', T('Newsletters', 'Boletines')],
+  ];
+  return `<div class="announcement">${icon('sun')} ${T('A little play. A lot of happy.', 'Un poco de juego. Mucha alegría.')} <span>${T('Care in English & Spanish', 'Cuidado en inglés y español')}</span></div><header class="site-header"><div class="container header-inner">${brand()}<nav id="nav" aria-label="${T('Main navigation', 'Navegación principal')}">${items.map(([path, label]) => `<a href="#/${path}" ${current === path ? 'aria-current="page"' : ''}>${label}</a>`).join('')}</nav><div class="header-actions"><div class="language" aria-label="${T('Language', 'Idioma')}"><button data-lang="en" aria-pressed="${lang === 'en'}">EN</button><span>/</span><button data-lang="es" aria-pressed="${lang === 'es'}">ES</button></div>${btn(T('Book a tour', 'Agenda una visita'))}<button class="menu-toggle icon-button" id="menu-toggle" aria-label="${T('Open menu', 'Abrir menú')}" aria-expanded="false">${icon('menu')}</button></div></div></header>`;
 }
 function footer() {
-  return `<footer><div class="container footer-grid"><div>${brand()}<p>${T('See you soon, little sunshine!', '¡Hasta pronto, rayito de sol!')}</p></div><div><strong>${T('Come explore', 'Ven a explorar')}</strong><a href="#/programs">${T('Our programs', 'Nuestros programas')}</a><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas frecuentes')}</a><a href="#/newsletters">${T('Newsletters', 'Boletines')}</a><a href="#/tour">${T('Virtual tour', 'Recorrido virtual')}</a></div><div><strong>${T('Let’s connect', 'Conectemos')}</strong><a href="#/book">${T('Schedule your visit', 'Agenda tu visita')}</a><a href="tel:+18474558687">847-455-8687</a><small>${T('Honey Bear family contact · New location details coming soon', 'Contacto de la familia Honey Bear · Nueva dirección próximamente')}</small></div><div class="footer-note">${icon('globe')}<strong>${T('Every family belongs.', 'Cada familia tiene su lugar.')}</strong><p>${T('We speak English. Hablamos español.', 'Hablamos español. We speak English.')}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Little Panda Daycare</span><span>${T('Demo · Stock photography · Program details subject to confirmation', 'Demo · Fotos de archivo · Detalles de programas por confirmar')}</span><a href="#/admin">${T('Staff demo', 'Demo del personal')} ↗</a></div></footer>`;
+  return `<footer><div class="container footer-grid"><div>${brand()}<p>${T('See you soon, little sunshine!', '¡Hasta pronto, rayito de sol!')}</p></div><div><strong>${T('Come explore', 'Ven a explorar')}</strong><a href="#/">${T('Home', 'Inicio')}</a><a href="#/programs">${T('Our programs', 'Nuestros programas')}</a><a href="#/about">${T('Our story', 'Nuestra historia')}</a><a href="#/faq">${T('Parent FAQs', 'Preguntas frecuentes')}</a><a href="#/newsletters">${T('Newsletters', 'Boletines')}</a><a href="#/tour">${T('Virtual tour', 'Recorrido virtual')}</a></div><div><strong>${T('Let’s connect', 'Conectemos')}</strong><a href="#/contact">${T('Contact us', 'Contáctanos')}</a><a href="#/book">${T('Schedule your visit', 'Agenda tu visita')}</a><a href="tel:+18474558687">847-455-8687</a><small>${T('Honey Bear family contact · New location details coming soon', 'Contacto de la familia Honey Bear · Nueva dirección próximamente')}</small></div><div class="footer-note">${icon('globe')}<strong>${T('Every family belongs.', 'Cada familia tiene su lugar.')}</strong><p>${T('We speak English. Hablamos español.', 'Hablamos español. We speak English.')}</p></div></div><div class="container footer-bottom"><span>© ${new Date().getFullYear()} Little Panda Daycare</span><span>${T('Demo · Stock photography · Program details subject to confirmation', 'Demo · Fotos de archivo · Detalles de programas por confirmar')}</span><a href="#/admin">${T('Staff demo', 'Demo del personal')} ↗</a></div></footer>`;
 }
 function home() {
   const rainbow = `<svg class="rainbow-doodle" viewBox="0 0 210 125" aria-hidden="true"><path d="M20 110a85 85 0 0 1 170 0" stroke="#f47b70"/><path d="M40 110a65 65 0 0 1 130 0" stroke="#ffc640"/><path d="M60 110a45 45 0 0 1 90 0" stroke="#65b7d0"/></svg>`;
@@ -223,12 +233,12 @@ function home() {
   <section class="sunny-programs section container" id="programs"><div class="sunny-section-title"><span class="hand-note">${T('Little people, big possibilities', 'Pequeños con grandes posibilidades')}</span><h2>${T('A place for <span>every age.</span>', 'Un lugar para <span>cada edad.</span>')}</h2></div><div class="sunny-program-grid">${programs()
     .map(
       (p, i) =>
-        `<article class="sunny-program program-${i}"><div class="toy-circle">${toyIcons[i]}</div><h3>${names[i]}</h3><span class="sunny-age">${p.age.split(' · ')[1]}</span><p>${blurbs[i]}</p><a href="#/book" data-program="${p.id}" aria-label="${T('Visit our ', 'Visita nuestro grupo de ')}${names[i]}">${T('Come explore', 'Ven a explorar')} ${icon('arrow')}</a></article>`,
+        `<article class="sunny-program program-${i}"><div class="toy-circle">${toyIcons[i]}</div><h3>${names[i]}</h3><span class="sunny-age">${p.age.split(' · ')[1]}</span><p>${blurbs[i]}</p><a href="#/programs" aria-label="${T('Learn about ', 'Conoce el grupo de ')}${names[i]}">${T('Learn more', 'Conoce más')} ${icon('arrow')}</a></article>`,
     )
     .join(
       '',
     )}</div><p class="section-footnote">${T('Demo program guide. Final age groups and availability to be confirmed.', 'Guía de programas demo. Edades y disponibilidad final por confirmar.')}</p></section>
-  <section class="sunny-story" id="about"><div class="container sunny-story-grid"><div class="sunny-story-photo"><img src="assets/child.jpg" alt="${T('A happy child covered in colorful paint — illustrative stock photo', 'Una niña feliz con pintura de colores — foto de archivo ilustrativa')}" width="1000" height="1506" loading="lazy"><span class="tape" aria-hidden="true"></span><div class="paint-stamp">${T('Made for<br>little makers', 'Para pequeños<br>artistas')}</div><span class="story-flower" aria-hidden="true">✿</span></div><div class="sunny-story-copy"><span class="hand-note">${T('A little about us', 'Un poquito de nosotros')}</span><h2>${T('Little days.<br><span>Lots of happy.</span>', 'Pequeños días.<br><span>Mucha alegría.</span>')}</h2><p>${T('A friendly place to learn through play, inspired by the family care at Honey Bear. Bring your little one. We’d love to meet you.', 'Un lugar para aprender jugando, inspirado en el cuidado familiar de Honey Bear. Trae a tu pequeño. Nos encantará conocerte.')}</p>${btn(T('Let’s meet each other', 'Vamos a conocernos'))}</div></div></section>
+  <section class="sunny-story" id="about"><div class="container sunny-story-grid"><div class="sunny-story-photo"><img src="assets/child.jpg" alt="${T('A happy child covered in colorful paint — illustrative stock photo', 'Una niña feliz con pintura de colores — foto de archivo ilustrativa')}" width="1000" height="1506" loading="lazy"><span class="tape" aria-hidden="true"></span><div class="paint-stamp">${T('Made for<br>little makers', 'Para pequeños<br>artistas')}</div><span class="story-flower" aria-hidden="true">✿</span></div><div class="sunny-story-copy"><span class="hand-note">${T('A little about us', 'Un poquito de nosotros')}</span><h2>${T('Little days.<br><span>Lots of happy.</span>', 'Pequeños días.<br><span>Mucha alegría.</span>')}</h2><p>${T('A friendly place to learn through play, inspired by the family care at Honey Bear. Bring your little one. We’d love to meet you.', 'Un lugar para aprender jugando, inspirado en el cuidado familiar de Honey Bear. Trae a tu pequeño. Nos encantará conocerte.')}</p>${btn(T('Meet our team', 'Conoce al equipo'), '#/about')}</div></div></section>
   <section class="sunny-day" id="day"><div class="container"><div class="sunny-section-title"><span class="hand-note">${T('A peek at our day', 'Un vistazo a nuestro día')}</span><h2>${T('Play. Create. <span>Repeat.</span>', 'Jugar. Crear. <span>Repetir.</span>')}</h2></div><div class="sunny-day-grid">${[
     [
       'sun',
@@ -462,29 +472,31 @@ function toast(message) {
 }
 function route() {
   const route = location.hash || '#/';
+  const page = route.slice(2).split('/')[0];
   document.documentElement.lang = lang;
-  document.title = route.startsWith('#/admin')
-    ? T('Staff dashboard | Little Panda', 'Panel del personal | Little Panda')
-    : route.startsWith('#/book')
-      ? T('Book a tour | Little Panda', 'Agenda una visita | Little Panda')
-      : route.startsWith('#/newsletters')
-        ? T('Newsletters | Little Panda', 'Boletines | Little Panda')
-        : route.startsWith('#/tour')
-          ? T('Virtual tour | Little Panda', 'Recorrido virtual | Little Panda')
-          : 'Little Panda Daycare | ' + T('Room to play. Room to grow.', 'Jugar. Reír. Crecer.');
-  $('#app').innerHTML = route.startsWith('#/admin')
-    ? adminPage()
-    : route.startsWith('#/book')
-      ? bookingPage()
-      : route.startsWith('#/newsletters')
-        ? newsletters.publicPage(route.split('/')[2])
-        : route.startsWith('#/tour')
-          ? tour.publicPage()
-          : home();
+  document.title = publicPages.has(page)
+    ? publicPages.title(page) + ' | Little Panda'
+    : route.startsWith('#/admin')
+      ? T('Staff dashboard | Little Panda', 'Panel del personal | Little Panda')
+      : route.startsWith('#/book')
+        ? T('Book a tour | Little Panda', 'Agenda una visita | Little Panda')
+        : route.startsWith('#/newsletters')
+          ? T('Newsletters | Little Panda', 'Boletines | Little Panda')
+          : route.startsWith('#/tour')
+            ? T('Virtual tour | Little Panda', 'Recorrido virtual | Little Panda')
+            : 'Little Panda Daycare | ' + T('Room to play. Room to grow.', 'Jugar. Reír. Crecer.');
+  $('#app').innerHTML = publicPages.has(page)
+    ? publicPages.render(page)
+    : route.startsWith('#/admin')
+      ? adminPage()
+      : route.startsWith('#/book')
+        ? bookingPage()
+        : route.startsWith('#/newsletters')
+          ? newsletters.publicPage(route.split('/')[2])
+          : route.startsWith('#/tour')
+            ? tour.publicPage()
+            : home();
   bind();
-  const section = route.slice(2);
-  if (['about', 'programs', 'day', 'faq'].includes(section))
-    requestAnimationFrame(() => document.getElementById(section)?.scrollIntoView());
 }
 function rememberDetails() {
   const form = $('#booking-form');
@@ -513,6 +525,12 @@ function refreshBooking() {
   }
 }
 function bind() {
+  document.querySelectorAll('#nav a').forEach((a) =>
+    a.addEventListener('click', () => {
+      if (a.getAttribute('href') === (location.hash || '#/'))
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }),
+  );
   document.querySelectorAll('a[href="#/book"]').forEach((el) =>
     el.addEventListener('click', () => {
       if (booking.result) {
@@ -943,7 +961,12 @@ function downloadICS(b) {
 }
 window.addEventListener('hashchange', () => {
   route();
-  if (!['#/about', '#/programs', '#/day', '#/faq'].includes(location.hash)) window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  const main = $('#main');
+  if (main) {
+    main.setAttribute('tabindex', '-1');
+    main.focus({ preventScroll: true });
+  }
 });
 window.addEventListener('storage', (e) => {
   if (e.key === KEY) {
@@ -981,4 +1004,5 @@ const tour = createTour({
   header,
   footer,
 });
+const publicPages = createPublicPages({ T, esc, icon, header, footer, btn });
 route();

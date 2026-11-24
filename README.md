@@ -12,13 +12,24 @@ npm run dev
 
 Open http://localhost:5173.
 
-- Website: `/#/`
+- Home: `/#/`
+- Our story and team: `/#/about`
+- Programs: `/#/programs`
+- A day here: `/#/day`
+- Parent FAQs: `/#/faq`
+- Contact: `/#/contact`
 - Book a family tour: `/#/book`
 - Staff dashboard: `/#/admin`
 - Published newsletters: `/#/newsletters`
 - Virtual tour: `/#/tour`
 
 Use the EN / ES buttons to switch the entire public site, booking flow, or dashboard. Language preference persists in the browser.
+
+## Public information pages
+
+Every navigation destination renders a separate page view, including a visible Home link, instead of scrolling to homepage anchors. Hash URLs support direct links and browser back/forward on GitHub Pages without rewrite configuration. The active page is identified with `aria-current`. Language switching stays on the same page.
+
+The About page includes Wanda Guerra’s background and ten staff names/roles from Honey Bear’s public staff page. Initials are used instead of fabricated or borrowed staff portraits. Programs summarizes the published age groups, educational support, and school transportation; the Contact page labels the existing Honey Bear address and number. A Day Here remains an illustrative routine, since the source did not provide exact hours. Source notes identify information used for the Little Panda demo. Text is maintained in `public-pages.js` and styles in `pages.css`.
 
 ## Demo walkthrough
 
@@ -71,6 +82,7 @@ npx playwright install chromium
 npm run test:browser
 npm run test:admin
 npm run test:tour
+npm run test:pages
 ```
 
 The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, split windows, lunch breaks, overlap validation, legacy schedules, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes. The walkthrough browser suite verifies branching doorway links, return paths, history, keyboard navigation, image alignment, uploads, bilingual destination editing, hiding/deleting destinations, legacy data preservation, and responsive layouts. The admin browser suite verifies newsletter drafts, bilingual validation, previews, publication, revision isolation, safe content rendering, persistence, unpublishing/deletion, and split availability at phone, tablet, and desktop widths.

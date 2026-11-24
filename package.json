@@ -10,7 +10,8 @@
     "test:browser": "node scripts/review.mjs",
     "format": "prettier --write .",
     "test:admin": "node scripts/admin-review.mjs",
-    "test:tour": "node scripts/tour-review.mjs"
+    "test:tour": "node scripts/tour-review.mjs",
+    "test:pages": "node scripts/pages-review.mjs"
   },
   "devDependencies": {
     "playwright": "^1.63.0",
