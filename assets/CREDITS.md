@@ -12,3 +12,7 @@ No photographs from honeybeardaycarecenter.com are included.
 - Compact panda SVG: original website illustration.
 
 Photographs are illustrative stock imagery. Confirm usage terms and replace with approved center photography for launch.
+
+## Connected walkthrough
+
+`walkthrough/entrance.jpg`, `reception.jpg`, `hallway.jpg`, `classroom.jpg`, `playroom.jpg`, and `garden.jpg` are original AI-generated demo views created with the built-in image_gen tool. Reception is the master reference; hallway was derived from it, and the remaining views were based on hallway. Complete prompts are in `walkthrough/prompts.json`. JPEGs are optimized copies of the generated originals. These show a fictional building, not actual Little Panda premises.

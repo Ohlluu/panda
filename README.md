@@ -43,13 +43,15 @@ This remains a browser-local showcase. Publishing updates this browser's demo we
 
 Older single-window schedules and existing appointments are kept compatible; no reset is required when upgrading.
 
-## Virtual tour demo
+## Connected walkthrough demo
 
-Open **Virtual tour** from the public navigation or homepage. Six sample spaces have numbered markers, bilingual details, room navigation, thumbnail selection, keyboard arrows, photo enlargement, and an in-person booking link. This is an interactive photo walkthrough, not a 360° capture or a representation of the actual facility.
+Open **Virtual tour** from the public navigation or homepage. Start outside the entrance, click the door to enter reception, then click the arch to reach the hallway. The blue classroom door, coral playroom door, and green garden door lead to their corresponding views. Interior views show the same colored doors and link back to the hallway. **Go back**, clickable breadcrumbs, **Turn back**, and **Start again** let visitors retrace their route. There is no room-gallery navigation or automatic next-room sequence.
 
-In **Staff demo → Virtual tour**, select a space to edit its name and description in English and Español. Choose a stock photo or upload a JPG/PNG/WebP up to 8 MB. Uploads are resized for the browser-local demo. Add or remove markers, write both language versions, and place markers by clicking the photo or using arrow keys after selecting a marker. **Save tour changes** updates this browser’s public tour. Use library arrows to reorder rooms, uncheck visibility to hide one, or add/delete spaces. Existing bookings and newsletters are preserved.
+Six coordinated fictional views are saved in `assets/walkthrough/`. They were generated with built-in image_gen from the reception master reference, then the hallway reference. The complete prompt set is in `assets/walkthrough/prompts.json`. JPEG copies are optimized for web delivery; adjacent views preload. Photo proportions are preserved on mobile so doorway arrows stay in the same place. The site labels the experience as an AI-generated fictional center, not real Little Panda premises or a 360° capture. Generated views approximate a consistent building but can contain small architectural differences.
 
-Tour edits and uploads stay in the current browser. Replace sample imagery with approved actual facility photographs before launch. A production shared tour editor needs authenticated staff access and hosted image storage. Real 360° panoramas can be integrated later when captured.
+In **Staff demo → Virtual tour**, edit a view in English and Español, choose a generated photo or upload a JPG/PNG/WebP, and add markers. Choose **Move to another view**, select the destination, set arrow direction and both labels, then position the arrow on the doorway by clicking the image or using arrow keys. **Show information** remains available for explanatory markers. Save updates this browser’s public walkthrough. The first visible view is the starting point; library order does not create connections. Hidden destinations are omitted from public arrows. Deleting a view removes inbound links. Old room-gallery edits remain preserved under the legacy `tourRooms` field; the connected walkthrough uses `walkthroughRooms`. Bookings and newsletters are untouched.
+
+Tour edits and uploads stay in the current browser. Replace each fictional view with a frame from the real center’s walkthrough video when available, then reposition its arrows. Production editing needs authenticated staff access and shared photo storage.
 
 ## Build and test
 
@@ -71,7 +73,7 @@ npm run test:admin
 npm run test:tour
 ```
 
-The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, split windows, lunch breaks, overlap validation, legacy schedules, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes. The tour browser suite verifies navigation, marker details, keyboard controls, image enlargement, photo uploads, ordering/visibility, bilingual editing, and responsive layouts. The admin browser suite verifies newsletter drafts, bilingual validation, previews, publication, revision isolation, safe content rendering, persistence, unpublishing/deletion, and split availability at phone, tablet, and desktop widths.
+The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, split windows, lunch breaks, overlap validation, legacy schedules, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes. The walkthrough browser suite verifies branching doorway links, return paths, history, keyboard navigation, image alignment, uploads, bilingual destination editing, hiding/deleting destinations, legacy data preservation, and responsive layouts. The admin browser suite verifies newsletter drafts, bilingual validation, previews, publication, revision isolation, safe content rendering, persistence, unpublishing/deletion, and split availability at phone, tablet, and desktop widths.
 
 ## Content and assets
 
@@ -81,6 +83,7 @@ The browser checks cover EN/ES switching, form submission, persistence, calendar
 - `assets/classroom.jpg`: [Pexels photo 8613089](https://www.pexels.com/photo/8613089/) — teacher reading with children.
 - `assets/learning.jpg`: [Pexels photo 3662667](https://www.pexels.com/photo/3662667/) — children playing with wooden blocks.
 - `assets/child.jpg`: [Unsplash source](https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9) — child enjoying art.
+- `assets/walkthrough/*.jpg`: six original AI-generated fictional facility views, with complete prompts in `assets/walkthrough/prompts.json`.
 - `assets/logo.png`: original AI-generated Little Panda Daycare logo concept.
 - `assets/favicon.svg`: original simple panda mark used as the favicon and small dashboard illustration.
 - Fonts: Fredoka, Patrick Hand, and DM Sans, served by Google Fonts with local system fallbacks.

@@ -1,4 +1,6 @@
+import { walkthroughPhotos } from './walkthrough-data.js?v=20261124-walk';
 export const tourPhotos = [
+  ...walkthroughPhotos,
   ['classroom', 'assets/classroom.jpg', 'Story time', 'Hora del cuento'],
   ['learning', 'assets/learning.jpg', 'Learning together', 'Aprendiendo juntos'],
   ['infants', 'assets/tour-infants.jpg', 'Infant care', 'Cuidado infantil'],

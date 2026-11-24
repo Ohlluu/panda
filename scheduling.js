@@ -1,4 +1,5 @@
-import { defaultTourRooms } from './tour-data.js?v=20261124-tour';
+import { defaultWalkthroughRooms } from './walkthrough-data.js?v=20261124-walk';
+import { defaultTourRooms } from './tour-data.js?v=20261124-walk';
 // All calendar dates and appointment times use America/Chicago wall time.
 export const zone = 'America/Chicago';
 export function dateKey(date) {
@@ -109,7 +110,13 @@ export function initialState() {
       sample: true,
     });
   }
-  return { settings, bookings, newsletters: [], tourRooms: defaultTourRooms() };
+  return {
+    settings,
+    bookings,
+    newsletters: [],
+    tourRooms: defaultTourRooms(),
+    walkthroughRooms: defaultWalkthroughRooms(),
+  };
 }
 
 // Older demos saved a single start/end pair. Keep them readable without resetting appointments.

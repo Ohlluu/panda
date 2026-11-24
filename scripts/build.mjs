@@ -9,6 +9,7 @@ for (const f of [
   'newsletters.js',
   'tour.js',
   'tour-data.js',
+  'walkthrough-data.js',
   'tour.css',
 ])
   await copyFile(f, `dist/${f}`);

@@ -9,9 +9,10 @@ import {
   initialState,
   dayWindows,
   validateWindows,
-} from './scheduling.js?v=20261124-tour';
-import { defaultTourRooms } from './tour-data.js?v=20261124-tour';
-import { createTour } from './tour.js?v=20261124-tour';
+} from './scheduling.js?v=20261124-walk';
+import { defaultWalkthroughRooms } from './walkthrough-data.js?v=20261124-walk';
+import { defaultTourRooms } from './tour-data.js?v=20261124-walk';
+import { createTour } from './tour.js?v=20261124-walk';
 import { createNewsletters } from './newsletters.js?v=20261118-admin';
 const $ = (s) => document.querySelector(s),
   esc = (s) =>
@@ -31,6 +32,9 @@ function read() {
           ...value,
           newsletters: Array.isArray(value.newsletters) ? value.newsletters : [],
           tourRooms: Array.isArray(value.tourRooms) ? value.tourRooms : defaultTourRooms(),
+          walkthroughRooms: Array.isArray(value.walkthroughRooms)
+            ? value.walkthroughRooms
+            : defaultWalkthroughRooms(),
         }
       : memory;
   } catch {

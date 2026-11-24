@@ -947,3 +947,413 @@
     max-width: 100%;
   }
 }
+/* Connected walkthrough: destinations live on the doors, not in a room gallery. */
+.connected-tour {
+  background: #f7f8fb;
+  padding-top: 32px;
+}
+.walk-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+.walk-heading .hand-note {
+  color: #9d84a5;
+  font-size: 24px;
+  margin-bottom: 13px;
+}
+.walk-heading h1 {
+  font-size: 47px;
+  line-height: 1.15;
+}
+.walk-heading h1 em {
+  color: #9673a9;
+}
+.walk-heading > .button {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.walk-travel-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 24px 0 15px;
+  min-width: 0;
+}
+.walk-back,
+.walk-restart,
+.walk-turn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid #dfe6f0;
+  background: #fffefa;
+  color: #5e7aa2;
+  border-radius: 20px;
+  font-size: 11px;
+  padding: 9px 14px;
+  white-space: nowrap;
+}
+.walk-back .icon,
+.walk-turn-back .icon {
+  width: 15px;
+  height: 15px;
+}
+.back-arrow {
+  transform: rotate(180deg);
+}
+.walk-restart {
+  margin-left: auto;
+  border: 0;
+  background: none;
+  font-size: 10px;
+}
+.walk-breadcrumbs {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.walk-breadcrumbs button {
+  background: transparent;
+  border: 0;
+  padding: 7px 0;
+  font-size: 11px;
+  color: #95a5b9;
+  flex-shrink: 0;
+}
+.walk-breadcrumbs button[aria-current] {
+  color: #58719a;
+  font-weight: 600;
+}
+.walk-breadcrumbs > span {
+  color: #b4bfce;
+  font-size: 18px;
+}
+.walk-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/2;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #e3e8ee;
+  box-shadow: 0 5px 0 #e1e5ed;
+}
+.walk-scene-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: walk-arrive 0.26s ease-out;
+}
+.walk-photo-badge {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  background: #fffdf4df;
+  color: #75829a;
+  border-radius: 18px;
+  padding: 6px 10px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.9px;
+}
+.walk-stage .tour-enlarge {
+  right: 18px;
+  top: 15px;
+}
+.walk-door {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 0;
+  background: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+.walk-door-arrow {
+  width: 48px;
+  height: 48px;
+  background: #fffffff2;
+  border: 3px solid #ffffffb0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #496c9c;
+  box-shadow:
+    0 0 0 6px #ffffff40,
+    0 5px 16px #20345440;
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+}
+.walk-door-arrow .icon {
+  width: 25px;
+  height: 25px;
+  stroke-width: 2;
+}
+.direction-forward .walk-door-arrow .icon {
+  transform: rotate(-90deg);
+}
+.direction-left .walk-door-arrow .icon,
+.direction-back .walk-door-arrow .icon {
+  transform: rotate(180deg);
+}
+.walk-door-label {
+  background: #fffffff0;
+  color: #526887;
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.4;
+  max-width: 190px;
+  box-shadow: 0 3px 12px #23374a20;
+}
+.walk-door:hover .walk-door-arrow,
+.walk-door:focus-visible .walk-door-arrow {
+  background: #e3edf9;
+  box-shadow:
+    0 0 0 10px #ffffff70,
+    0 5px 16px #20345440;
+}
+.walk-door:focus-visible {
+  outline: 0;
+}
+.walk-door:focus-visible .walk-door-arrow {
+  outline: 3px solid #a27bb7;
+  outline-offset: 8px;
+}
+.walk-image-hint {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  color: #536783;
+  background: #fffdf5e8;
+  padding: 8px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.walk-image-hint .icon {
+  width: 13px;
+  height: 13px;
+}
+.walk-scene-caption {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 26px 0 28px;
+}
+.walk-scene-caption > div {
+  flex: 1;
+  min-width: 0;
+}
+.walk-scene-caption h2 {
+  font-size: 30px;
+  color: #46638d;
+}
+.walk-scene-caption p {
+  font-size: 13px;
+  color: #8594a9;
+  margin-top: 10px;
+  line-height: 1.8;
+}
+.walk-turn-back {
+  border-color: #d9e1ed;
+  background: #f0f4fa;
+  font-size: 10px;
+}
+.walk-progress {
+  font-size: 10px;
+  color: #9aabc1;
+  white-space: nowrap;
+}
+.walk-no-doors {
+  font-size: 12px;
+  text-align: center;
+  color: #9b86aa;
+  padding: 10px 20px 22px;
+}
+.connected-tour .tour-visit-note {
+  margin-top: 27px;
+}
+.tour-admin-photo {
+  aspect-ratio: 3/2;
+}
+.tour-admin-photo > img {
+  object-fit: contain;
+}
+.tour-point-editors select {
+  font-size: 12px;
+}
+@keyframes walk-arrive {
+  from {
+    opacity: 0.65;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (max-width: 850px) {
+  .walk-heading h1 {
+    font-size: 39px;
+  }
+  .walk-heading .hand-note {
+    font-size: 22px;
+  }
+  .walk-heading > .button {
+    font-size: 11px;
+    padding-inline: 17px;
+    gap: 10px;
+  }
+  .walk-scene-caption {
+    flex-wrap: wrap;
+    gap: 16px 20px;
+  }
+  .walk-scene-caption > div {
+    flex-basis: 60%;
+  }
+  .walk-progress {
+    margin-left: auto;
+  }
+}
+@media (max-width: 600px) {
+  .connected-tour {
+    padding-top: 26px;
+  }
+  .walk-heading {
+    display: block;
+    margin-bottom: 18px;
+  }
+  .walk-heading .hand-note {
+    font-size: 22px;
+    margin-bottom: 13px;
+  }
+  .walk-heading h1 {
+    font-size: 36px;
+    max-width: 320px;
+  }
+  .walk-heading > .button {
+    margin-top: 18px;
+    min-height: 40px;
+    font-size: 10px;
+    padding: 10px 16px;
+  }
+  .walk-travel-bar {
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 19px;
+  }
+  .walk-back {
+    font-size: 10px;
+    padding: 8px 12px;
+  }
+  .walk-restart {
+    font-size: 10px;
+    padding: 7px 0;
+  }
+  .walk-breadcrumbs {
+    order: 3;
+    flex-basis: 100%;
+    gap: 9px;
+  }
+  .walk-breadcrumbs button {
+    font-size: 10px;
+  }
+  .walk-stage {
+    border-radius: 16px;
+    aspect-ratio: 3/2;
+  }
+  .walk-photo-badge {
+    top: 10px;
+    left: 10px;
+    font-size: 6px;
+    padding: 4px 7px;
+    letter-spacing: 0.5px;
+  }
+  .walk-stage .tour-enlarge {
+    top: 8px;
+    right: 9px;
+    width: 27px;
+    height: 27px;
+  }
+  .walk-door {
+    gap: 8px;
+  }
+  .walk-door-arrow {
+    width: 34px;
+    height: 34px;
+    border-width: 2px;
+    box-shadow:
+      0 0 0 4px #ffffff40,
+      0 3px 10px #20345440;
+  }
+  .walk-door-arrow .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .walk-door-label {
+    font-size: 9px;
+    padding: 5px 7px;
+    border-radius: 7px;
+    max-width: 98px;
+  }
+  .walk-image-hint {
+    font-size: 7px;
+    padding: 5px 8px;
+    bottom: 9px;
+    gap: 4px;
+  }
+  .walk-image-hint .icon {
+    width: 10px;
+    height: 10px;
+  }
+  .walk-scene-caption {
+    margin: 22px 0 24px;
+    gap: 16px;
+  }
+  .walk-scene-caption > div {
+    flex-basis: 100%;
+  }
+  .walk-scene-caption h2 {
+    font-size: 29px;
+  }
+  .walk-scene-caption p {
+    font-size: 13px;
+    margin-top: 10px;
+  }
+  .walk-turn-back {
+    font-size: 9px;
+    padding: 8px 10px;
+  }
+  .walk-progress {
+    font-size: 9px;
+  }
+  .connected-tour .tour-visit-note {
+    margin-top: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .walk-scene-image {
+    animation: none;
+  }
+}
