@@ -7,6 +7,9 @@ for (const f of [
   'app.js',
   'scheduling.js',
   'newsletters.js',
+  'tour.js',
+  'tour-data.js',
+  'tour.css',
 ])
   await copyFile(f, `dist/${f}`);
 await cp('assets', 'dist/assets', { recursive: true });

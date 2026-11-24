@@ -16,6 +16,7 @@ Open http://localhost:5173.
 - Book a family tour: `/#/book`
 - Staff dashboard: `/#/admin`
 - Published newsletters: `/#/newsletters`
+- Virtual tour: `/#/tour`
 
 Use the EN / ES buttons to switch the entire public site, booking flow, or dashboard. Language preference persists in the browser.
 
@@ -30,7 +31,7 @@ Use the EN / ES buttons to switch the entire public site, booking flow, or dashb
 7. Return to the dashboard to see the new booking. Use search, status filters, and **View details**.
 8. Use **Reset demo data** in the dashboard footer to start fresh.
 
-Schedules, newsletters, bookings, and the three clearly labeled sample families are stored in localStorage under `little-panda-demo-v1`. Data survives page refresh in the same browser and origin. Tabs on the same origin receive updates. Separate devices and browsers do not share data. Blocked dates preserve existing bookings; contact/reschedule those families separately in the demo.
+Schedules, tour edits, newsletters, bookings, and the three clearly labeled sample families are stored in localStorage under `little-panda-demo-v1`. Data survives page refresh in the same browser and origin. Tabs on the same origin receive updates. Separate devices and browsers do not share data. Blocked dates preserve existing bookings; contact/reschedule those families separately in the demo.
 
 ## Newsletter publishing demo
 
@@ -41,6 +42,14 @@ Published editions appear under **Newsletters** on the public website. Saving a 
 This remains a browser-local showcase. Publishing updates this browser's demo website, not a shared CMS or a mailing list; other visitors and devices cannot see these local editions. No email is sent. Production newsletter publishing needs authenticated staff access and shared storage, with an email service if email distribution is wanted.
 
 Older single-window schedules and existing appointments are kept compatible; no reset is required when upgrading.
+
+## Virtual tour demo
+
+Open **Virtual tour** from the public navigation or homepage. Six sample spaces have numbered markers, bilingual details, room navigation, thumbnail selection, keyboard arrows, photo enlargement, and an in-person booking link. This is an interactive photo walkthrough, not a 360° capture or a representation of the actual facility.
+
+In **Staff demo → Virtual tour**, select a space to edit its name and description in English and Español. Choose a stock photo or upload a JPG/PNG/WebP up to 8 MB. Uploads are resized for the browser-local demo. Add or remove markers, write both language versions, and place markers by clicking the photo or using arrow keys after selecting a marker. **Save tour changes** updates this browser’s public tour. Use library arrows to reorder rooms, uncheck visibility to hide one, or add/delete spaces. Existing bookings and newsletters are preserved.
+
+Tour edits and uploads stay in the current browser. Replace sample imagery with approved actual facility photographs before launch. A production shared tour editor needs authenticated staff access and hosted image storage. Real 360° panoramas can be integrated later when captured.
 
 ## Build and test
 
@@ -59,9 +68,10 @@ npx playwright install chromium
 # In a separate terminal: npm run dev
 npm run test:browser
 npm run test:admin
+npm run test:tour
 ```
 
-The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, split windows, lunch breaks, overlap validation, legacy schedules, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes. The admin browser suite verifies newsletter drafts, bilingual validation, previews, publication, revision isolation, safe content rendering, persistence, unpublishing/deletion, and split availability at phone, tablet, and desktop widths.
+The browser checks cover EN/ES switching, form submission, persistence, calendar download, rescheduling, cancellation, saved availability, date blocking, mobile navigation, and overflow at 390, 768, and 1440 pixels. Screenshots are written to the operating system's temporary directory. Scheduling unit tests cover conflicts, split windows, lunch breaks, overlap validation, legacy schedules, buffers, closures, past dates, Chicago time, and existing bookings after schedule changes. The tour browser suite verifies navigation, marker details, keyboard controls, image enlargement, photo uploads, ordering/visibility, bilingual editing, and responsive layouts. The admin browser suite verifies newsletter drafts, bilingual validation, previews, publication, revision isolation, safe content rendering, persistence, unpublishing/deletion, and split availability at phone, tablet, and desktop widths.
 
 ## Content and assets
 

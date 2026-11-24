@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+import { addDays } from '../scheduling.js';
 import os from 'node:os';
 import path from 'node:path';
 const output = (name) => path.join(os.tmpdir(), name);
@@ -45,6 +46,10 @@ const bookings = await page.evaluate(
 const id = bookings.find((b) => b.name === 'Demo Family').id;
 await page.locator(`[data-manage="${id}"]`).click();
 await page.getByRole('button', { name: 'Reschedule', exact: true }).click();
+for (let n = 0; n < 7 && (await page.locator('#reschedule-time option').count()) < 2; n++) {
+  const next = addDays(await page.locator('#reschedule-date').inputValue(), 1);
+  await page.locator('#reschedule-date').fill(next);
+}
 await page.locator('#reschedule-time').selectOption({ index: 1 });
 await page.getByRole('button', { name: 'Save new time' }).click();
 await page.locator(`[data-manage="${id}"]`).click();

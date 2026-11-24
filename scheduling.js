@@ -1,3 +1,4 @@
+import { defaultTourRooms } from './tour-data.js?v=20261124-tour';
 // All calendar dates and appointment times use America/Chicago wall time.
 export const zone = 'America/Chicago';
 export function dateKey(date) {
@@ -108,7 +109,7 @@ export function initialState() {
       sample: true,
     });
   }
-  return { settings, bookings, newsletters: [] };
+  return { settings, bookings, newsletters: [], tourRooms: defaultTourRooms() };
 }
 
 // Older demos saved a single start/end pair. Keep them readable without resetting appointments.
